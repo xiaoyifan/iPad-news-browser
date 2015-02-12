@@ -8,10 +8,15 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "SharedNetworking.h"
+#import "MasterCell.h"
 
 @interface MasterViewController ()
 
-@property NSMutableArray *objects;
+@property NSDictionary* links;
+
+@property (nonatomic, strong) NSMutableArray *objects;
+
 @end
 
 @implementation MasterViewController
@@ -28,25 +33,49 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    
+    [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
+                                                success:^(NSDictionary *dictionary, NSError *error){
+                                                    self.links = dictionary[@"responseData"][@"feed"][@"entries"];
+                                                    
+                                                    for (NSDictionary *link in self.links) {
+                                                        NSLog(@"%@, %@, %@, %@",
+                                                        link[@"link"],
+                                                        link[@"contentSnippet"],
+                                                        link[@"publishedDate"],
+                                                        link[@"title"]);
+                                                        [self insertNewObject:link];
+                                                        //put the dictionary object into the Mutable Array
+                                                    }
+                                                    
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self.tableView reloadData];
+                                                    });
+                                                }failure:^{
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        NSLog(@"Problem happened");
+                                                    });
+                                                    
+                                                }];
 }
 
 - (void)insertNewObject:(id)sender {
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    [self.objects insertObject:sender atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 #pragma mark - Segues
 
@@ -72,25 +101,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    MasterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasterCell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+        self.issue = [self.objects objectAtIndex:indexPath.row];
+    
+//    cell.textLabel.text = [issue objectForKey:@"title"];
+//    cell.detailTextLabel.text = [issue objectForKey:@"contentSnippet"];
+    cell.itemTitle.text = [self.issue objectForKey:@"title"];
+    NSLog(@"Title is: %@",cell.itemTitle.text);
+    cell.itemSnippet.text = [self.issue objectForKey:@"contentSnippet"];
+    NSLog(@"Snippet is %@",cell.itemSnippet.text);
+//    //cell.itemDate.text =
+    
+    
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Return NO if you do not want the specified item to be editable.
+//    return YES;
+//}
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        [self.objects removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//    }
+//}
 
 @end

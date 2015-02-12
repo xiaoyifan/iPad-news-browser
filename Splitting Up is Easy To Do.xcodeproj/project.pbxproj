@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC032F881A8D4C2000D16270 /* MasterCell.m */; };
 		CCC667741A8B1DE500566932 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667731A8B1DE500566932 /* main.m */; };
 		CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667761A8B1DE500566932 /* AppDelegate.m */; };
 		CCC6677A1A8B1DE500566932 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667791A8B1DE500566932 /* MasterViewController.m */; };
@@ -15,6 +16,7 @@
 		CCC667821A8B1DE500566932 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCC667811A8B1DE500566932 /* Images.xcassets */; };
 		CCC667851A8B1DE500566932 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCC667831A8B1DE500566932 /* LaunchScreen.xib */; };
 		CCC667911A8B1DE600566932 /* Splitting_Up_is_Easy_To_DoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667901A8B1DE600566932 /* Splitting_Up_is_Easy_To_DoTests.m */; };
+		CCD5DBAB1A8C620800D77401 /* SharedNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD5DBAA1A8C620800D77401 /* SharedNetworking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC032F871A8D4C2000D16270 /* MasterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterCell.h; sourceTree = "<group>"; };
+		CC032F881A8D4C2000D16270 /* MasterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterCell.m; sourceTree = "<group>"; };
 		CCC6676E1A8B1DE500566932 /* Splitting Up is Easy To Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Splitting Up is Easy To Do.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC667721A8B1DE500566932 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCC667731A8B1DE500566932 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,6 +47,8 @@
 		CCC6678A1A8B1DE600566932 /* Splitting Up is Easy To DoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Splitting Up is Easy To DoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC6678F1A8B1DE600566932 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCC667901A8B1DE600566932 /* Splitting_Up_is_Easy_To_DoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Splitting_Up_is_Easy_To_DoTests.m; sourceTree = "<group>"; };
+		CCD5DBA91A8C620800D77401 /* SharedNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedNetworking.h; sourceTree = "<group>"; };
+		CCD5DBAA1A8C620800D77401 /* SharedNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedNetworking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC032F8A1A8D4C2F00D16270 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				CC032F871A8D4C2000D16270 /* MasterCell.h */,
+				CC032F881A8D4C2000D16270 /* MasterCell.m */,
+				CCC667781A8B1DE500566932 /* MasterViewController.h */,
+				CCC667791A8B1DE500566932 /* MasterViewController.m */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		CC032F8B1A8D4C4500D16270 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CCC6677B1A8B1DE500566932 /* DetailViewController.h */,
+				CCC6677C1A8B1DE500566932 /* DetailViewController.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
 		CCC667651A8B1DE400566932 = {
 			isa = PBXGroup;
 			children = (
@@ -84,12 +110,10 @@
 		CCC667701A8B1DE500566932 /* Splitting Up is Easy To Do */ = {
 			isa = PBXGroup;
 			children = (
-				CCC667751A8B1DE500566932 /* AppDelegate.h */,
-				CCC667761A8B1DE500566932 /* AppDelegate.m */,
-				CCC667781A8B1DE500566932 /* MasterViewController.h */,
-				CCC667791A8B1DE500566932 /* MasterViewController.m */,
-				CCC6677B1A8B1DE500566932 /* DetailViewController.h */,
-				CCC6677C1A8B1DE500566932 /* DetailViewController.m */,
+				CCD5DBA91A8C620800D77401 /* SharedNetworking.h */,
+				CCD5DBAA1A8C620800D77401 /* SharedNetworking.m */,
+				CC032F8B1A8D4C4500D16270 /* Detail */,
+				CC032F8A1A8D4C2F00D16270 /* Master */,
 				CCC6677E1A8B1DE500566932 /* Main.storyboard */,
 				CCC667811A8B1DE500566932 /* Images.xcassets */,
 				CCC667831A8B1DE500566932 /* LaunchScreen.xib */,
@@ -101,6 +125,8 @@
 		CCC667711A8B1DE500566932 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCC667751A8B1DE500566932 /* AppDelegate.h */,
+				CCC667761A8B1DE500566932 /* AppDelegate.m */,
 				CCC667721A8B1DE500566932 /* Info.plist */,
 				CCC667731A8B1DE500566932 /* main.m */,
 			);
@@ -226,6 +252,8 @@
 			files = (
 				CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */,
 				CCC6677A1A8B1DE500566932 /* MasterViewController.m in Sources */,
+				CCD5DBAB1A8C620800D77401 /* SharedNetworking.m in Sources */,
+				CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */,
 				CCC667741A8B1DE500566932 /* main.m in Sources */,
 				CCC6677D1A8B1DE500566932 /* DetailViewController.m in Sources */,
 			);
@@ -354,6 +382,7 @@
 				INFOPLIST_FILE = "Splitting Up is Easy To Do/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -364,6 +393,7 @@
 				INFOPLIST_FILE = "Splitting Up is Easy To Do/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -420,6 +450,7 @@
 				CCC667961A8B1DE600566932 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CCC667971A8B1DE600566932 /* Build configuration list for PBXNativeTarget "Splitting Up is Easy To DoTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +459,7 @@
 				CCC667991A8B1DE600566932 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
