@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C106a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -37,14 +37,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem image="favorite" id="h3w-S2-oX7"/>
+                        <barButtonItem image="favorite" id="h3w-S2-oX7">
+                            <connections>
+                                <action selector="addFavorite:" destination="JEX-9P-axG" id="OfV-bR-T66"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="btZ-ax-syC"/>
-                        <barButtonItem image="twitter" id="6kV-d0-bx9"/>
+                        <barButtonItem image="twitter" id="6kV-d0-bx9">
+                            <connections>
+                                <action selector="TweetAboutIt:" destination="JEX-9P-axG" id="x39-sg-JhL"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="D7E-l3-G16">
                             <connections>
-                                <segue destination="Zi7-kG-tWn" kind="popover" popoverAnchorBarButtonItem="D7E-l3-G16" id="MLe-DE-nsc">
+                                <segue destination="Zi7-kG-tWn" kind="popover" identifier="showBookMark" popoverAnchorBarButtonItem="D7E-l3-G16" id="MLe-DE-nsc">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -61,10 +69,10 @@
             </objects>
             <point key="canvasLocation" x="860" y="220"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Bookmark Table View Controller-->
         <scene sceneID="Tb1-Ed-TQg">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="TV2-Jh-Y1m" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="TV2-Jh-Y1m" customClass="bookmarkTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0qe-T5-58q">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

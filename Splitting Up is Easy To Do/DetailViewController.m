@@ -7,12 +7,15 @@
 //
 
 #import "DetailViewController.h"
+#import "bookmarkTableViewController.h"
 
 @interface DetailViewController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
+
+@property (strong, nonatomic) NSMutableArray *favoriteArray;
 
 
 @end
@@ -39,6 +42,17 @@
     
     [self.myWebView loadRequest:request];
     self.myWebView.delegate = self;
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults arrayForKey:@"favoriteArray"] == nil) {
+        self.favoriteArray = [[NSMutableArray alloc]init];
+        [defaults setObject:self.favoriteArray forKey:@"favoriteArray"];
+        [defaults synchronize];
+    }
+    else{
+        self.favoriteArray = [NSMutableArray arrayWithArray:[defaults arrayForKey:@"favoriteArray"]];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -57,5 +71,27 @@
 }
 
 
+- (IBAction)addFavorite:(UIBarButtonItem *)sender {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [self.favoriteArray addObject:self.item];
+    
+    [defaults setObject:self.favoriteArray forKey:@"favoriteArray"];
+    [defaults synchronize];
+    
+    NSLog(@"favorite item is added");
+    
+    
+    //log out what we have in the NSUserDefaults
+    for (int i=0; i<self.favoriteArray.count; i++) {
+        NSLog(@"%@", [[self.favoriteArray objectAtIndex:i] objectForKey:@"title"]);
+    }
+}
 
+
+
+- (IBAction)TweetAboutIt:(UIBarButtonItem *)sender {
+    
+}
 @end
