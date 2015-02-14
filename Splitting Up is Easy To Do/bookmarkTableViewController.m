@@ -66,6 +66,34 @@
     return YES;
 }
 
+- (IBAction)EditTable:(UIBarButtonItem *)sender {
+    
+    if ([self.tableView isEditing]) {
+        self.tableView.editing = NO;
+        sender.title = @"Edit";
+    }
+    else{
+        self.tableView.editing = YES;
+        sender.title = @"Done";
+    }
+    
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.ItemArray removeObjectAtIndex:indexPath.row];
+        
+         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.ItemArray forKey:@"favoriteArray"];
+        [defaults synchronize];
+        
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
 
 /*
 // Override to support editing the table view.

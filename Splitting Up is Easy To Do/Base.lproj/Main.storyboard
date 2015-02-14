@@ -106,7 +106,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Item" id="TSR-7x-rcp"/>
+                        <barButtonItem title="Edit" id="TSR-7x-rcp">
+                            <connections>
+                                <action selector="EditTable:" destination="TV2-Jh-Y1m" id="764-ID-aU2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xp5-IG-fBJ"/>
                         <barButtonItem title="Item" id="AEM-3j-hoL"/>
                     </toolbarItems>

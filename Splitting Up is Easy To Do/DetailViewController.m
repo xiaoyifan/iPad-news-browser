@@ -55,16 +55,19 @@
     }
 }
 
+
 -(void)viewWillAppear:(BOOL)animated{
     self.myWebView.frame = self.view.frame;
     self.myWebView.scalesPageToFit = YES;
 
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
     self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
