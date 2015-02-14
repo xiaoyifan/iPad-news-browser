@@ -89,9 +89,35 @@
     }
 }
 
+#pragma mark - bookmark Delegate implementation
+
+-(void)bookmark:(id)sender sendsURL:(NSURL *)url{
+    [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    
+}
 
 
 - (IBAction)TweetAboutIt:(UIBarButtonItem *)sender {
     
 }
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showBookMark"]) {
+        
+        bookmarkTableViewController *bookmarkVC = (bookmarkTableViewController *)[[segue destinationViewController] topViewController];
+        
+        bookmarkVC.delegate = self;
+        
+        [bookmarkVC setItemArray:self.favoriteArray];
+        
+        
+    }
+    
+    
+    
+}
+
+
 @end

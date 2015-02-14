@@ -33,9 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
     
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                 success:^(NSDictionary *dictionary, NSError *error){

@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol bookmarkToWebviewDelegate <NSObject>
+
+-(void)bookmark:(id)sender sendsURL:(NSURL*)url;
+
+@end
+
+
+
 @interface bookmarkTableViewController : UITableViewController
+
+@property (weak, nonatomic) id<bookmarkToWebviewDelegate> delegate;
+
+@property (strong, nonatomic) NSMutableArray *ItemArray;
 
 @end

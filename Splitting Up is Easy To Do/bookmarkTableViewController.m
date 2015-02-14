@@ -10,6 +10,7 @@
 
 @interface bookmarkTableViewController ()
 
+
 @end
 
 @implementation bookmarkTableViewController
@@ -17,11 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,34 +29,43 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+
+    return self.ItemArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookmarkCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSDictionary* dictionary = [self.ItemArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [dictionary objectForKey:@"title"];
+    cell.detailTextLabel.text = [dictionary objectForKey:@"contentSnippet"];
     
     return cell;
 }
-*/
 
-/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary* issue = [self.ItemArray objectAtIndex:indexPath.row];
+    
+    NSString* url = [issue objectForKey:@"link"];
+    
+    [self.delegate bookmark:self sendsURL:[NSURL URLWithString:url]];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
 
 /*
 // Override to support editing the table view.

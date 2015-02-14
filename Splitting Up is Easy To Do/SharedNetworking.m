@@ -25,6 +25,8 @@
              success:(void (^)(NSDictionary *dictionary, NSError *error))successCompletion
              failure:(void (^)(void))failureCompletion{
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     // Google News API url
     NSString *googleUrl = @"http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=30&q=http%3A%2F%2Fnews.google.com%2Fnews%3Foutput%3Drss";
     
@@ -49,6 +51,9 @@
                     NSLog(@"Downloaded Data: %@", dictionary);
                     
                     successCompletion(dictionary, nil);
+                    
+                    
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 }
                 else{
                     
@@ -65,6 +70,8 @@
                 }
                 
             }] resume];
+    
+    
 }
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "bookmarkTableViewController.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController<bookmarkToWebviewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 
