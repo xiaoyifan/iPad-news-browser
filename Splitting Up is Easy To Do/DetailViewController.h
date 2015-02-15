@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "bookmarkTableViewController.h"
+#import "Social/Social.h"
 
 @interface DetailViewController : UIViewController<bookmarkToWebviewDelegate>
 

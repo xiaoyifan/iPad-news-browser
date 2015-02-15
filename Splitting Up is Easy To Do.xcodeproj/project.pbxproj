@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC032F881A8D4C2000D16270 /* MasterCell.m */; };
+		CC46BA301A90138D00FA2715 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC46BA2F1A90138D00FA2715 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CC98605D1A8EA41A00217B10 /* bookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */; };
 		CCC667741A8B1DE500566932 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667731A8B1DE500566932 /* main.m */; };
 		CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667761A8B1DE500566932 /* AppDelegate.m */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		CC032F871A8D4C2000D16270 /* MasterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterCell.h; sourceTree = "<group>"; };
 		CC032F881A8D4C2000D16270 /* MasterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterCell.m; sourceTree = "<group>"; };
+		CC46BA2F1A90138D00FA2715 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CC98605B1A8EA41A00217B10 /* bookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookmarkTableViewController.h; sourceTree = "<group>"; };
 		CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookmarkTableViewController.m; sourceTree = "<group>"; };
 		CCC6676E1A8B1DE500566932 /* Splitting Up is Easy To Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Splitting Up is Easy To Do.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC46BA301A90138D00FA2715 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 		CCC667651A8B1DE400566932 = {
 			isa = PBXGroup;
 			children = (
+				CC46BA2F1A90138D00FA2715 /* Social.framework */,
 				CCC667701A8B1DE500566932 /* Splitting Up is Easy To Do */,
 				CCC6678D1A8B1DE600566932 /* Splitting Up is Easy To DoTests */,
 				CCC6676F1A8B1DE500566932 /* Products */,
