@@ -76,6 +76,7 @@
 - (void)refreshAction {
     NSLog(@"Pull To Refresh");
     // Do something with the table data
+    
     [self.tableView reloadData];
     // End the spinner on the table
     [self.refreshControl endRefreshing];
@@ -135,8 +136,14 @@
     self.issue = [self.objects objectAtIndex:indexPath.row];
     cell.itemTitle.text = [self.issue objectForKey:@"title"];
     cell.itemSnippet.text = [self.issue objectForKey:@"contentSnippet"];
-    cell.itemDate.text = [self.issue objectForKey:@"publishedDate"];
     
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc]init];
+    [dateformat setDateFormat:@"eee, dd MMM yyyy HH:mm:ss ZZZZ"];
+    NSDate *publishDate = [dateformat dateFromString:[self.issue objectForKey:@"publishedDate"]];
+    
+    [dateformat setDateFormat:@"MM-dd-yyyy"];
+    NSString *date = [dateformat stringFromDate:publishDate];
+    cell.itemDate.text = date;
     
     return cell;
 }

@@ -8,7 +8,7 @@
 
 #import "bookmarkTableViewController.h"
 
-@interface bookmarkTableViewController ()
+@interface bookmarkTableViewController ()<UIAlertViewDelegate>
 
 
 @end
@@ -25,6 +25,30 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark-toolbar buttons
+- (IBAction)EditTable:(UIBarButtonItem *)sender {
+    
+    if ([self.tableView isEditing]) {
+        self.tableView.editing = NO;
+        sender.title = @"Edit";
+    }
+    else{
+        self.tableView.editing = YES;
+        sender.title = @"Done";
+    }
+    
+}
+
+
+- (IBAction)clearBookMark:(UIBarButtonItem *)sender {
+    
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"you are going to delete all bookmark records" delegate:self cancelButtonTitle:@"Sure" otherButtonTitles:@"Never mind", nil];
+    [deleteAlert show];
+    
+}
+
 
 #pragma mark - Table view data source
 
@@ -66,18 +90,6 @@
     return YES;
 }
 
-- (IBAction)EditTable:(UIBarButtonItem *)sender {
-    
-    if ([self.tableView isEditing]) {
-        self.tableView.editing = NO;
-        sender.title = @"Edit";
-    }
-    else{
-        self.tableView.editing = YES;
-        sender.title = @"Done";
-    }
-    
-}
 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,6 +104,18 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+#pragma mark - UIAlertView delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        [self.ItemArray removeAllObjects];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.ItemArray forKey:@"favoriteArray"];
+        [defaults synchronize];
+        [self.tableView reloadData];
     }
 }
 

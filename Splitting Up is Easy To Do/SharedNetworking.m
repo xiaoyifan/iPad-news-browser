@@ -58,6 +58,10 @@
                 else{
                     
                     NSLog(@"Fail not 200:");
+                    
+                    UIAlertView *failure = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"network is not available right now, check it out later" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    
+                    [failure show];
                     // Use dispatch_async to update the table on the main thread
                     // Remember that NSURLSession is downloading in the background
                     dispatch_async(dispatch_get_main_queue(), ^{

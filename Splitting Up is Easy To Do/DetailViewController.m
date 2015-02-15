@@ -9,13 +9,17 @@
 #import "DetailViewController.h"
 #import "bookmarkTableViewController.h"
 
-@interface DetailViewController ()<UIWebViewDelegate>
+@interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
 
 @property (strong, nonatomic) NSMutableArray *favoriteArray;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *twitterButton;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *facebookButton;
 
 
 @end
@@ -33,6 +37,9 @@
     
     if ([self.url isEqualToString:@"http://google.com"]) {
         self.favoriteButton.enabled = NO;
+        self.twitterButton.enabled = NO;
+        self.facebookButton.enabled = NO;
+     
     }
     //if the page we load is the default one, we gotta disable the like button, cuz the default page cannot be liked.
     
@@ -66,11 +73,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
--(void)webViewDidStartLoad:(UIWebView *)webView{
-    self.myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 
@@ -113,12 +115,6 @@
     }
 }
 
-#pragma mark - bookmark Delegate implementation
-
--(void)bookmark:(id)sender sendsURL:(NSURL *)url{
-    [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    
-}
 
 
 - (IBAction)TweetAboutIt:(UIBarButtonItem *)sender {
@@ -126,7 +122,7 @@
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *twitterPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        NSString *text = [NSString stringWithFormat:@"I liked the article: %@ ,check it out: %@",[self.item objectForKey:@"title"],[self.item objectForKey:@"link"]];
+        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",[self.item objectForKey:@"title"],[self.item objectForKey:@"link"]];
         [twitterPost setInitialText:text];
         [self presentViewController:twitterPost animated:YES completion:nil];
     }
@@ -140,8 +136,51 @@
         [alertView show];
     }
     
+}
+
+- (IBAction)facebookSharing:(UIBarButtonItem *)sender {
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *facebookPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",[self.item objectForKey:@"title"],[self.item objectForKey:@"link"]];
+        [facebookPost setInitialText:text];
+        [self presentViewController:facebookPost animated:YES completion:nil];
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Sorry"
+                                  message:@"You can't send a Facebook post right now, make sure your device has an internet connection and you have at least one Facebook account setup"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
     
 }
+
+
+#pragma mark - webView delegate implementation
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+}
+
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+}
+
+
+#pragma mark - bookmark Delegate implementation
+
+-(void)bookmark:(id)sender sendsURL:(NSURL *)url{
+    [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    
+}
+
 
 #pragma mark - Segue
 

@@ -27,11 +27,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" id="KYL-XK-vZN">
+                            <webView contentMode="scaleAspectFill" scalesPageToFit="YES" id="KYL-XK-vZN">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="985"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -45,11 +45,16 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="btZ-ax-syC"/>
                         <barButtonItem image="twitter" id="6kV-d0-bx9">
                             <connections>
-                                <action selector="TweetAboutIt:" destination="JEX-9P-axG" id="x39-sg-JhL"/>
+                                <action selector="TweetAboutIt:" destination="JEX-9P-axG" id="giV-R1-aH1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="facebook" id="47V-b9-IBu">
+                            <connections>
+                                <action selector="facebookSharing:" destination="JEX-9P-axG" id="i0c-xm-MIQ"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
+                    <navigationItem key="navigationItem" title="News" id="mOI-FS-AaM">
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="D7E-l3-G16">
                             <connections>
                                 <segue destination="Zi7-kG-tWn" kind="popover" identifier="showBookMark" popoverAnchorBarButtonItem="D7E-l3-G16" id="MLe-DE-nsc">
@@ -60,16 +65,18 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="facebookButton" destination="47V-b9-IBu" id="LeJ-Ee-Y20"/>
                         <outlet property="favoriteButton" destination="h3w-S2-oX7" id="Ahq-GK-CyG"/>
                         <outlet property="myWebVIew" destination="KYL-XK-vZN" id="p3n-oE-i4h"/>
                         <outlet property="myWebView" destination="KYL-XK-vZN" id="sQ2-95-4JL"/>
+                        <outlet property="twitterButton" destination="6kV-d0-bx9" id="Rhf-Z7-anQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="860" y="220"/>
         </scene>
-        <!--Bookmark Table View Controller-->
+        <!--Bookmark-->
         <scene sceneID="Tb1-Ed-TQg">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="TV2-Jh-Y1m" customClass="bookmarkTableViewController" sceneMemberID="viewController">
@@ -112,9 +119,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xp5-IG-fBJ"/>
-                        <barButtonItem title="Item" id="AEM-3j-hoL"/>
+                        <barButtonItem title="clear" id="AEM-3j-hoL">
+                            <connections>
+                                <action selector="clearBookMark:" destination="TV2-Jh-Y1m" id="05w-wD-aWw"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="MEg-oB-mwb"/>
+                    <navigationItem key="navigationItem" title="Bookmark" id="MEg-oB-mwb"/>
                     <value key="contentSizeForViewInPopover" type="size" width="500" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </tableViewController>
@@ -140,12 +151,12 @@
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="MasterCell" rowHeight="81" id="WCw-Qf-5nD" customClass="MasterCell">
+                            <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="MasterCell" rowHeight="88" id="WCw-Qf-5nD" customClass="MasterCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
@@ -153,21 +164,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DQt-Xg-zCo">
-                                            <rect key="frame" x="8" y="31" width="308" height="21"/>
+                                            <rect key="frame" x="8" y="31" width="308" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5mI-wg-7uM">
-                                            <rect key="frame" x="8" y="52" width="280" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5mI-wg-7uM">
+                                            <rect key="frame" x="8" y="52" width="280" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6we-79-jT0">
-                                            <rect key="frame" x="8" y="8" width="287" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="287" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -189,11 +200,11 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="List" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="907.51999999999998" y="-1165.6533333333334"/>
+            <point key="canvasLocation" x="907" y="-1166"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -239,6 +250,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="facebook" width="50" height="50"/>
         <image name="favorite" width="25" height="25"/>
         <image name="twitter" width="25" height="25"/>
     </resources>
