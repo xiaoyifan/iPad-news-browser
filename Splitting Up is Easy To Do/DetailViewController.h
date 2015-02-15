@@ -14,10 +14,11 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 
+//the link from MasterViewController
 @property (strong, nonatomic) NSString *url;
 
+//the dictionary item from MasterVC
 @property (strong, nonatomic) NSDictionary *item;
-//item is the dictionary of current page
 
 @end
 

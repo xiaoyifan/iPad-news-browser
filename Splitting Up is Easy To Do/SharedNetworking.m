@@ -33,7 +33,7 @@
     // Create NSUrlSession
     NSURLSession *session = [NSURLSession sharedSession];
     
-    // Create data download taks
+    // Create data download task
     [[session dataTaskWithURL:[NSURL URLWithString:googleUrl]
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
@@ -57,17 +57,19 @@
                 }
                 else{
                     
-                    NSLog(@"Fail not 200:");
+                    NSLog(@"Fail not 200");
                     
-                    UIAlertView *failure = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"network is not available right now, check it out later" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     
-                    [failure show];
                     // Use dispatch_async to update the table on the main thread
                     // Remember that NSURLSession is downloading in the background
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         if (failureCompletion) {
                             failureCompletion();
+                            //handle the situation if the network connection is failed.
+                            UIAlertView *failure = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"network is not available right now, check it out later" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            
+                            [failure show];
                         }
                         //code to end the refreshing operation
                     });

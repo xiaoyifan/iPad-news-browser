@@ -11,7 +11,7 @@
 
 @protocol bookmarkToWebviewDelegate <NSObject>
 
--(void)bookmark:(id)sender sendsURL:(NSURL*)url;
+-(void)bookmark:(id)sender sendsURL:(NSURL*)url andUpdateDictionaryItem:(NSDictionary*)dic;
 
 @end
 
@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) id<bookmarkToWebviewDelegate> delegate;
 
+//item array is the array of favorite items
 @property (strong, nonatomic) NSMutableArray *ItemArray;
 
 @end

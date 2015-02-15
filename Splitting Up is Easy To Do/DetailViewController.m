@@ -12,14 +12,17 @@
 @interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
+//the main webview of displaying web page
 
 @property (strong, nonatomic) NSMutableArray *favoriteArray;
+//items in the array will be loaded to BookmarkViewController
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *twitterButton;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *facebookButton;
+//UIBarButtons' outlets
 
 
 @end
@@ -39,18 +42,21 @@
         self.favoriteButton.enabled = NO;
         self.twitterButton.enabled = NO;
         self.facebookButton.enabled = NO;
-     
+        //when the view is loaded at the first time, we choose google.com as the default page
+        //and the default page can't be liked or shared
     }
-    //if the page we load is the default one, we gotta disable the like button, cuz the default page cannot be liked.
-    
+
     NSURL* nsUrl = [NSURL URLWithString:self.url];
+    //get the url from segue
     
     NSURLRequest* request = [NSURLRequest requestWithURL:nsUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     
+     self.myWebView.delegate = self;
     [self.myWebView loadRequest:request];
-    self.myWebView.delegate = self;
+    //load the URL request to WebView
     
     
+    //if the favorite Array doesn't exist in NSUserDefault, we gotta initialize it.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults arrayForKey:@"favoriteArray"] == nil) {
         self.favoriteArray = [[NSMutableArray alloc]init];
@@ -59,6 +65,7 @@
     }
     else{
         self.favoriteArray = [NSMutableArray arrayWithArray:[defaults arrayForKey:@"favoriteArray"]];
+        //if the array exists, get the array from NSUserDefault and change it to NSMutableArray
     }
 }
 
@@ -79,6 +86,8 @@
 - (IBAction)addFavorite:(UIBarButtonItem *)sender {
     
     NSInteger flag = 0;
+    //flag is 0: the page is not in the bookmark list
+    //flag is 1: the page is in the bookmark list
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -87,15 +96,16 @@
         NSString *title = [[self.favoriteArray objectAtIndex:i] objectForKey:@"title"];
         if ([title isEqualToString:[self.item objectForKey:@"title"]]) {
             flag =1;
+            //use loop to detect is the page is already liked before
             break;
         }
     }
-    //if the flag =1 , u can add this page to bookmark again.
     
     if (flag == 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Favorite" message:@"this page is already favorited, and you can check it out in bookmark" delegate:self cancelButtonTitle:@"got it" otherButtonTitles:nil, nil];
         
         [alert show];
+        //UIAlertView to inform users that the page can't be liked again
     }
     else{
      
@@ -103,19 +113,19 @@
         [defaults setObject:self.favoriteArray forKey:@"favoriteArray"];
         [defaults synchronize];
         //add the page info into bookmark
+        //and sync to standardUserDefault
+        
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Liked it" message:@"you can check this page out from bookmark" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:nil, nil];
+        
+        [alert show];
         
     }
     
     NSLog(@"favorite item is added");
     
-    
-    //log out what we have in the NSUserDefaults
-    for (int i=0; i<self.favoriteArray.count; i++) {
-        NSLog(@"%@", [[self.favoriteArray objectAtIndex:i] objectForKey:@"title"]);
-    }
 }
 
-
+#pragma mark-social network implementation
 
 - (IBAction)TweetAboutIt:(UIBarButtonItem *)sender {
     
@@ -162,6 +172,7 @@
 
 #pragma mark - webView delegate implementation
 
+//network indicator specification
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
@@ -176,9 +187,9 @@
 
 #pragma mark - bookmark Delegate implementation
 
--(void)bookmark:(id)sender sendsURL:(NSURL *)url{
+-(void)bookmark:(id)sender sendsURL:(NSURL *)url andUpdateDictionaryItem:(NSDictionary *)dic{
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    
+    self.item = dic;
 }
 
 
@@ -191,6 +202,7 @@
         
         bookmarkVC.delegate = self;
         
+        //segue the favorite Array to bookmarkViewController
         [bookmarkVC setItemArray:self.favoriteArray];
         
         

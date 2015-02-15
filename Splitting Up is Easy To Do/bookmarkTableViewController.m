@@ -10,15 +10,12 @@
 
 @interface bookmarkTableViewController ()<UIAlertViewDelegate>
 
-
 @end
 
 @implementation bookmarkTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +25,7 @@
 
 
 #pragma mark-toolbar buttons
+
 - (IBAction)EditTable:(UIBarButtonItem *)sender {
     
     if ([self.tableView isEditing]) {
@@ -40,7 +38,6 @@
     }
     
 }
-
 
 - (IBAction)clearBookMark:(UIBarButtonItem *)sender {
     
@@ -69,6 +66,7 @@
     NSDictionary* dictionary = [self.ItemArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [dictionary objectForKey:@"title"];
     cell.detailTextLabel.text = [dictionary objectForKey:@"contentSnippet"];
+    //load bookmark cell
     
     return cell;
 }
@@ -79,7 +77,9 @@
     
     NSString* url = [issue objectForKey:@"link"];
     
-    [self.delegate bookmark:self sendsURL:[NSURL URLWithString:url]];
+    [self.delegate bookmark:self sendsURL:[NSURL URLWithString:url] andUpdateDictionaryItem: issue];
+    //segue items back
+    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -99,11 +99,9 @@
          NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.ItemArray forKey:@"favoriteArray"];
         [defaults synchronize];
-        
+        //bookmark Edit
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
 

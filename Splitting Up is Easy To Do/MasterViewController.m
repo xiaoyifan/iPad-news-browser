@@ -35,29 +35,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
-                                                success:^(NSDictionary *dictionary, NSError *error){
-                                                    self.links = dictionary[@"responseData"][@"feed"][@"entries"];
-                                                    
-                                                    for (NSDictionary *link in self.links) {
-                                                        NSLog(@"%@, %@, %@, %@",
-                                                        link[@"link"],
-                                                        link[@"contentSnippet"],
-                                                        link[@"publishedDate"],
-                                                        link[@"title"]);
-                                                        [self insertNewObject:link];
-                                                        //put the dictionary object into the Mutable Array
-                                                    }
-                                                    
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        [self.tableView reloadData];
-                                                    });
-                                                }failure:^{
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        NSLog(@"Problem happened");
-                                                    });
-                                                    
-                                                }];
+    [self downloadDataFromWeb];
     
     
     UIRefreshControl *pullToRefresh = [[UIRefreshControl alloc] init];
@@ -73,21 +51,57 @@
 
 }
 
-- (void)refreshAction {
-    NSLog(@"Pull To Refresh");
-    // Do something with the table data
-    
-    [self.tableView reloadData];
-    // End the spinner on the table
-    [self.refreshControl endRefreshing];
-}
-
+/*
+ detail function implementation of inserting items into Array named Objects
+ */
 - (void)insertNewObject:(id)sender {
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
     }
     [self.objects addObject:sender];
     [self.tableView reloadData];
+}
+
+
+-(void)downloadDataFromWeb{
+    
+    //download data from internet and put into self.objects
+    [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
+                                                 success:^(NSDictionary *dictionary, NSError *error){
+                                                     self.links = dictionary[@"responseData"][@"feed"][@"entries"];
+                                                     
+                                                     for (NSDictionary *link in self.links) {
+                                                         NSLog(@"%@, %@, %@, %@",
+                                                               link[@"link"],
+                                                               link[@"contentSnippet"],
+                                                               link[@"publishedDate"],
+                                                               link[@"title"]);
+                                                         [self insertNewObject:link];
+                                                         //put the dictionary object into the Mutable Array
+                                                     }
+                                                     
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [self.tableView reloadData];
+                                                     });
+                                                 }failure:^{
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         NSLog(@"Problem happened");
+                                                     });
+                                                     
+                                                 }];
+    
+}
+
+//table refreshing
+- (void)refreshAction {
+    NSLog(@"Pull To Refresh");
+    // Do something with the table data
+    
+    [self downloadDataFromWeb];
+    
+    [self.tableView reloadData];
+    // End the spinner on the table
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,13 +122,13 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         NSDictionary * issueItem = [self.objects objectAtIndex:indexPath.row];
+        //get the item tapped in the tableView
         
         NSString *link = [issueItem objectForKey:@"link"];
-        
         [controller setUrl:link];
         //link is used to load the request
+        
         [controller setItem:issueItem];
-        //the item here is a dictionary
         //just used to be an dictionary item added into the bookmark
         
     }
@@ -137,6 +151,8 @@
     cell.itemTitle.text = [self.issue objectForKey:@"title"];
     cell.itemSnippet.text = [self.issue objectForKey:@"contentSnippet"];
     
+    
+    //Date Format specification
     NSDateFormatter *dateformat = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:@"eee, dd MMM yyyy HH:mm:ss ZZZZ"];
     NSDate *publishDate = [dateformat dateFromString:[self.issue objectForKey:@"publishedDate"]];
