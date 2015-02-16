@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 XiaoYifan. All rights reserved.
 //
 
+#import "SharedNetworking.h"
 #import "DetailViewController.h"
 #import "bookmarkTableViewController.h"
 
@@ -85,6 +86,11 @@
 
 - (IBAction)addFavorite:(UIBarButtonItem *)sender {
     
+    if(![SharedNetworking isNetworkAvailable])
+    {
+        return;
+    }
+    
     NSInteger flag = 0;
     //flag is 0: the page is not in the bookmark list
     //flag is 1: the page is in the bookmark list
@@ -129,6 +135,11 @@
 
 - (IBAction)TweetAboutIt:(UIBarButtonItem *)sender {
     
+    if(![SharedNetworking isNetworkAvailable])
+    {
+        return;
+    }
+    
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *twitterPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
@@ -149,6 +160,11 @@
 }
 
 - (IBAction)facebookSharing:(UIBarButtonItem *)sender {
+    
+    if(![SharedNetworking isNetworkAvailable])
+    {
+        return;
+    }
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *facebookPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
