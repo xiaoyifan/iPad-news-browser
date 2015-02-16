@@ -21,9 +21,34 @@
     return shared;
 }
 
++ (BOOL)isNetworkAvailable
+{
+    CFNetDiagnosticRef dReference;
+    dReference = CFNetDiagnosticCreateWithURL (NULL, (__bridge CFURLRef)[NSURL URLWithString:@"www.apple.com"]);
+    
+    CFNetDiagnosticStatus status;
+    status = CFNetDiagnosticCopyNetworkStatusPassively (dReference, NULL);
+    
+    CFRelease (dReference);
+    
+    if ( status == kCFNetDiagnosticConnectionUp ) {
+        NSLog (@"Connection is fine");
+        return YES;
+    }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Unavailable" message:@"Please check you connection. Have no access to the network" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return NO;
+    }
+}
+
 -(void)getFeedForURL:(NSString*)url
              success:(void (^)(NSDictionary *dictionary, NSError *error))successCompletion
              failure:(void (^)(void))failureCompletion{
+    
+    if (![SharedNetworking isNetworkAvailable]) {
+        return;
+    }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     

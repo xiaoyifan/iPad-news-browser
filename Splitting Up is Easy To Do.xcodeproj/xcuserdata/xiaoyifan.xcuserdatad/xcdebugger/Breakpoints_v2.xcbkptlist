@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Splitting Up is Easy To Do/MasterViewController.m"
-            timestampString = "445671719.130558"
+            timestampString = "445813613.445309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "-refreshAction"
             landmarkType = "5">
          </BreakpointContent>

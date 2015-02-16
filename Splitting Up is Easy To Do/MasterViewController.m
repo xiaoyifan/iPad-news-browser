@@ -51,34 +51,12 @@
 
 }
 
-/*
- detail function implementation of inserting items into Array named Objects
- */
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    [self.objects addObject:sender];
-    [self.tableView reloadData];
-}
-
-
 -(void)downloadDataFromWeb{
     
     //download data from internet and put into self.objects
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
-                                                     self.links = dictionary[@"responseData"][@"feed"][@"entries"];
-                                                     
-                                                     for (NSDictionary *link in self.links) {
-                                                         NSLog(@"%@, %@, %@, %@",
-                                                               link[@"link"],
-                                                               link[@"contentSnippet"],
-                                                               link[@"publishedDate"],
-                                                               link[@"title"]);
-                                                         [self insertNewObject:link];
-                                                         //put the dictionary object into the Mutable Array
-                                                     }
+                                                     self.objects = dictionary[@"responseData"][@"feed"][@"entries"];
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
@@ -110,10 +88,17 @@
 }
 
 
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
+        if(![SharedNetworking isNetworkAvailable])
+        {
+            return;
+        }
+        //Network checking, to make the app robust
         
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -133,6 +118,8 @@
         
     }
 }
+
+
 
 #pragma mark - Table View
 

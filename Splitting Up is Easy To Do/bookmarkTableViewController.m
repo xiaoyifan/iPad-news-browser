@@ -7,6 +7,7 @@
 //
 
 #import "bookmarkTableViewController.h"
+#import "SharedNetworking.h"
 
 @interface bookmarkTableViewController ()<UIAlertViewDelegate>
 
@@ -72,6 +73,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(![SharedNetworking isNetworkAvailable])
+    {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    //Network checking, to make the app robust
     
     NSDictionary* issue = [self.ItemArray objectAtIndex:indexPath.row];
     

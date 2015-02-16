@@ -13,6 +13,8 @@
 
 +(id)sharedSharedWorking;
 
++ (BOOL)isNetworkAvailable;
+
 -(void)getFeedForURL:(NSString*)url
              success:(void (^)(NSDictionary *dictionary, NSError *error))successCompletion
              failure:(void (^)(void))failureCompletion;
