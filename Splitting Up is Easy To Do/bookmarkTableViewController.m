@@ -41,7 +41,11 @@
 
 - (IBAction)clearBookMark:(UIBarButtonItem *)sender {
     
-    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"you are going to delete all bookmark records" delegate:self cancelButtonTitle:@"Sure" otherButtonTitles:@"Never mind", nil];
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                          message:@"you are going to delete all bookmark records"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Sure"
+                                                otherButtonTitles:@"Never mind", nil];
     [deleteAlert show];
     
 }
@@ -92,7 +96,9 @@
 
 
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.ItemArray removeObjectAtIndex:indexPath.row];
         

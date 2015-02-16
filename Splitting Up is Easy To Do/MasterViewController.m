@@ -51,34 +51,12 @@
 
 }
 
-/*
- detail function implementation of inserting items into Array named Objects
- */
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    [self.objects addObject:sender];
-    [self.tableView reloadData];
-}
-
-
 -(void)downloadDataFromWeb{
     
     //download data from internet and put into self.objects
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
-                                                     self.links = dictionary[@"responseData"][@"feed"][@"entries"];
-                                                     
-                                                     for (NSDictionary *link in self.links) {
-                                                         NSLog(@"%@, %@, %@, %@",
-                                                               link[@"link"],
-                                                               link[@"contentSnippet"],
-                                                               link[@"publishedDate"],
-                                                               link[@"title"]);
-                                                         [self insertNewObject:link];
-                                                         //put the dictionary object into the Mutable Array
-                                                     }
+                                                     self.objects = dictionary[@"responseData"][@"feed"][@"entries"];
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
