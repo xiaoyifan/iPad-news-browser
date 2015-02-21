@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "SharedNetworking.h"
 #import "MasterCell.h"
+#import "Article.h"
 
 @interface MasterViewController ()
 
@@ -56,7 +57,25 @@
     //download data from internet and put into self.objects
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
-                                                     self.objects = dictionary[@"responseData"][@"feed"][@"entries"];
+                                                     self.links = dictionary[@"responseData"][@"feed"][@"entries"];
+                                                     
+                                                     if (self.objects == nil) {
+                                                         self.objects = [[NSMutableArray alloc]init];
+                                                     }
+                                                     
+                                                     [self.objects removeAllObjects];
+                                                     for (NSDictionary *link in self.links) {
+                                                         Article *article = [[Article alloc]init];
+                                                         article.title = [link objectForKey:@"title"];
+                                                         article.publishedDate = [link objectForKey:@"publishedDate"];
+                                                         article.contentSnippet = [link objectForKey:@"contentSnippet"];
+                                                         article.link = [link objectForKey:@"link"];
+                                                         
+                                                         
+                                                         [self.objects addObject:article];
+                                                        
+                                        
+                                                     }
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
@@ -107,10 +126,10 @@
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
-        NSDictionary * issueItem = [self.objects objectAtIndex:indexPath.row];
+        Article * issueItem = [self.objects objectAtIndex:indexPath.row];
         //get the item tapped in the tableView
         
-        NSString *link = [issueItem objectForKey:@"link"];
+        NSString *link = issueItem.link;
         [controller setUrl:link];
         //link is used to load the request
         
@@ -129,6 +148,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     return self.objects.count;
 }
 
@@ -136,14 +156,14 @@
     MasterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasterCell" forIndexPath:indexPath];
 
     self.issue = [self.objects objectAtIndex:indexPath.row];
-    cell.itemTitle.text = [self.issue objectForKey:@"title"];
-    cell.itemSnippet.text = [self.issue objectForKey:@"contentSnippet"];
+    cell.itemTitle.text = self.issue.title;
+    cell.itemSnippet.text = self.issue.contentSnippet;
     
     
     //Date Format specification
     NSDateFormatter *dateformat = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:@"eee, dd MMM yyyy HH:mm:ss ZZZZ"];
-    NSDate *publishDate = [dateformat dateFromString:[self.issue objectForKey:@"publishedDate"]];
+    NSDate *publishDate = [dateformat dateFromString:self.issue.publishedDate];
     
     [dateformat setDateFormat:@"MM-dd-yyyy"];
     NSString *date = [dateformat stringFromDate:publishDate];

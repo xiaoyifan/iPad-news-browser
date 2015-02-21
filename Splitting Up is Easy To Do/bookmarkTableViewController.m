@@ -64,9 +64,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookmarkCell" forIndexPath:indexPath];
     
-    NSDictionary* dictionary = [self.ItemArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [dictionary objectForKey:@"title"];
-    cell.detailTextLabel.text = [dictionary objectForKey:@"contentSnippet"];
+    Article* article = [self.ItemArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = article.title;
+    cell.detailTextLabel.text = article.contentSnippet;
     //load bookmark cell
     
     return cell;
@@ -81,11 +81,11 @@
     }
     //Network checking, to make the app robust
     
-    NSDictionary* issue = [self.ItemArray objectAtIndex:indexPath.row];
+    Article* article = [self.ItemArray objectAtIndex:indexPath.row];
     
-    NSString* url = [issue objectForKey:@"link"];
+    NSString* url = article.link;
     
-    [self.delegate bookmark:self sendsURL:[NSURL URLWithString:url] andUpdateDictionaryItem: issue];
+    [self.delegate bookmark:self sendsURL:[NSURL URLWithString:url] andUpdateArticleItem:article];
     //segue items back
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];

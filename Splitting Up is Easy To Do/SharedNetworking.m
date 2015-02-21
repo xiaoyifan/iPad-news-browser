@@ -73,7 +73,7 @@
                     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                                options:NSJSONReadingAllowFragments
                                                                                  error:&jsonError];
-                    NSLog(@"Downloaded Data: %@", dictionary);
+                    //NSLog(@"Downloaded Data: %@", dictionary);
                     
                     successCompletion(dictionary, nil);
                     

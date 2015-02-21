@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "bookmarkTableViewController.h"
 #import "Social/Social.h"
+#import "Article.h"
 
 @interface DetailViewController : UIViewController<bookmarkToWebviewDelegate>
 
@@ -18,7 +19,7 @@
 @property (strong, nonatomic) NSString *url;
 
 //the dictionary item from MasterVC
-@property (strong, nonatomic) NSDictionary *item;
+@property (strong, nonatomic) Article *item;
 
 @end
 

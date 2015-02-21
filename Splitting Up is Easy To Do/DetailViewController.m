@@ -99,8 +99,8 @@
     
     //the favoriteArray is already synced with NSUserdefault
     for (int i=0; i<self.favoriteArray.count; i++) {
-        NSString *title = [[self.favoriteArray objectAtIndex:i] objectForKey:@"title"];
-        if ([title isEqualToString:[self.item objectForKey:@"title"]]) {
+        NSString *title = [[self.favoriteArray objectAtIndex:i] title];
+        if ([title isEqualToString:self.item.title]) {
             flag =1;
             //use loop to detect is the page is already liked before
             break;
@@ -143,7 +143,7 @@
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *twitterPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",[self.item objectForKey:@"title"],[self.item objectForKey:@"link"]];
+        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",self.item.title,self.item.link];
         [twitterPost setInitialText:text];
         [self presentViewController:twitterPost animated:YES completion:nil];
     }
@@ -169,7 +169,7 @@
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *facebookPost = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",[self.item objectForKey:@"title"],[self.item objectForKey:@"link"]];
+        NSString *text = [NSString stringWithFormat:@"great page: %@ ,check it out: %@",self.item.title, self.item.link];
         [facebookPost setInitialText:text];
         [self presentViewController:facebookPost animated:YES completion:nil];
     }
@@ -203,9 +203,9 @@
 
 #pragma mark - bookmark Delegate implementation
 
--(void)bookmark:(id)sender sendsURL:(NSURL *)url andUpdateDictionaryItem:(NSDictionary *)dic{
+-(void)bookmark:(id)sender sendsURL:(NSURL *)url andUpdateArticleItem:(Article *)article{
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
-    self.item = dic;
+    self.item = article;
 }
 
 

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Article.h"
 
 @protocol bookmarkToWebviewDelegate <NSObject>
 
--(void)bookmark:(id)sender sendsURL:(NSURL*)url andUpdateDictionaryItem:(NSDictionary*)dic;
+-(void)bookmark:(id)sender sendsURL:(NSURL*)url andUpdateArticleItem:(Article*)article;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Article.h"
 
 @class DetailViewController;
 
@@ -14,7 +15,7 @@
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
-@property (strong, nonatomic) NSDictionary *issue;
+@property (strong, nonatomic) Article *issue;
 
 @end
 

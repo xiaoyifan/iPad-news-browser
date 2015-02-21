@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC032F881A8D4C2000D16270 /* MasterCell.m */; };
 		CC46BA301A90138D00FA2715 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC46BA2F1A90138D00FA2715 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CC7772341A98418900A012D4 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7772331A98418900A012D4 /* Article.m */; };
 		CC98605D1A8EA41A00217B10 /* bookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */; };
 		CCC667741A8B1DE500566932 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667731A8B1DE500566932 /* main.m */; };
 		CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667761A8B1DE500566932 /* AppDelegate.m */; };
@@ -35,6 +36,8 @@
 		CC032F871A8D4C2000D16270 /* MasterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterCell.h; sourceTree = "<group>"; };
 		CC032F881A8D4C2000D16270 /* MasterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterCell.m; sourceTree = "<group>"; };
 		CC46BA2F1A90138D00FA2715 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CC7772321A98418900A012D4 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = ../Article.h; sourceTree = "<group>"; };
+		CC7772331A98418900A012D4 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = ../Article.m; sourceTree = "<group>"; };
 		CC98605B1A8EA41A00217B10 /* bookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookmarkTableViewController.h; sourceTree = "<group>"; };
 		CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookmarkTableViewController.m; sourceTree = "<group>"; };
 		CCC6676E1A8B1DE500566932 /* Splitting Up is Easy To Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Splitting Up is Easy To Do.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +131,8 @@
 			children = (
 				CCD5DBA91A8C620800D77401 /* SharedNetworking.h */,
 				CCD5DBAA1A8C620800D77401 /* SharedNetworking.m */,
+				CC7772321A98418900A012D4 /* Article.h */,
+				CC7772331A98418900A012D4 /* Article.m */,
 				CC032F8A1A8D4C2F00D16270 /* Master */,
 				CC032F8B1A8D4C4500D16270 /* Detail */,
 				CC9860571A8EA39400217B10 /* bookmark */,
@@ -267,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC7772341A98418900A012D4 /* Article.m in Sources */,
 				CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */,
 				CCC6677A1A8B1DE500566932 /* MasterViewController.m in Sources */,
 				CCD5DBAB1A8C620800D77401 /* SharedNetworking.m in Sources */,
