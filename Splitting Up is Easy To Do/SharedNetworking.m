@@ -64,7 +64,7 @@
                                 NSURLResponse *response,
                                 NSError *error) {
                 
-                NSLog(@"Response:%@", response);
+                //NSLog(@"Response:%@", response);
                         
                 NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
                 

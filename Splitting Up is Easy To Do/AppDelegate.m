@@ -22,7 +22,57 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    
+    NSObject *night_obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_nightmode"];
+
+    if (!night_obj) {
+        [self registerSettingBundle];
+    }
+    else{
+        NSLog(@"night mode: %@", night_obj.description);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"]) {
+    
+            [self setBlackAttribute];
+            
+        }
+        else{
+            [self setWhiteAttribute];
+        }
+
+    }
+    
+    
+    
     return YES;
+}
+
+-(void)setBlackAttribute
+{
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarStyle: UIBarStyleBlackTranslucent];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+    [[UIToolbar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    [[UIToolbar appearance] setTintColor:[UIColor whiteColor]];
+}
+
+-(void)setWhiteAttribute
+{
+   
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor blackColor], NSForegroundColorAttributeName,
+                                                          [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+    
+}
+
+-(void)registerSettingBundle{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *appDefaultsMode = [NSDictionary dictionaryWithObject:@"NO"
+                                                                forKey:@"enabled_nightmode"];
+    [defaults registerDefaults:appDefaultsMode];
+    
+    [defaults synchronize];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -33,10 +83,12 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

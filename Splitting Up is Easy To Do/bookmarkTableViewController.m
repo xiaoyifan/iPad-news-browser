@@ -8,6 +8,7 @@
 
 #import "bookmarkTableViewController.h"
 #import "SharedNetworking.h"
+#import "FileSession.h"
 
 @interface bookmarkTableViewController ()<UIAlertViewDelegate>
 
@@ -104,12 +105,13 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.ItemArray removeObjectAtIndex:indexPath.row];
         
-         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.ItemArray forKey:@"favoriteArray"];
-        [defaults synchronize];
+        NSURL *fileURL = [FileSession getListURL];
+        [FileSession writeData:self.ItemArray ToList:fileURL];
+        
         //bookmark Edit
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
     }
 }
 
@@ -118,9 +120,8 @@
     
     if (buttonIndex == 0) {
         [self.ItemArray removeAllObjects];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.ItemArray forKey:@"favoriteArray"];
-        [defaults synchronize];
+        NSURL *fileURL = [FileSession getListURL];
+        [FileSession writeData:self.ItemArray ToList:fileURL];
         [self.tableView reloadData];
     }
 }

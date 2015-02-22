@@ -21,5 +21,7 @@
 //the dictionary item from MasterVC
 @property (strong, nonatomic) Article *item;
 
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteStar;
+
 @end
 

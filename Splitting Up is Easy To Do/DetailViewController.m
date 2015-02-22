@@ -9,8 +9,9 @@
 #import "SharedNetworking.h"
 #import "DetailViewController.h"
 #import "bookmarkTableViewController.h"
+#import "FileSession.h"
 
-@interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate>
+@interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate, NSCoding>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
 //the main webview of displaying web page
@@ -24,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *facebookButton;
 //UIBarButtons' outlets
+
 
 
 @end
@@ -57,17 +59,39 @@
     //load the URL request to WebView
     
     
-    //if the favorite Array doesn't exist in NSUserDefault, we gotta initialize it.
+    NSURL *fileURL= [FileSession getListURL];
+    
+    self.favoriteArray = [NSMutableArray arrayWithArray:[FileSession readDataFromList:fileURL]];
+    //save favorite items to array, and things will be loaded to bookmarkViewController
+    
+    
+    self.favoriteStar.hidden = YES;
+    for (int i=0; i<self.favoriteArray.count; i++) {
+        NSString *title = [[self.favoriteArray objectAtIndex:i] title];
+        if ([title isEqualToString:self.item.title]) {
+            self.favoriteStar.hidden = NO;
+            NSLog(@"It's a favorite article");
+            //use loop to detect is the page is already liked before
+            break;
+        }
+    }
+    
+    
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults arrayForKey:@"favoriteArray"] == nil) {
-        self.favoriteArray = [[NSMutableArray alloc]init];
-        [defaults setObject:self.favoriteArray forKey:@"favoriteArray"];
-        [defaults synchronize];
+    if (self.item!=nil) {
+        NSData *serialized = [NSKeyedArchiver archivedDataWithRootObject:self.item];
+        
+        [defaults setObject:serialized forKey:@"lastItem"];
+        
+        
     }
-    else{
-        self.favoriteArray = [NSMutableArray arrayWithArray:[defaults arrayForKey:@"favoriteArray"]];
-        //if the array exists, get the array from NSUserDefault and change it to NSMutableArray
-    }
+    
+    [defaults setObject:self.url forKey:@"lastUrl"];
+    [defaults synchronize];
+    
+    
 }
 
 
@@ -95,9 +119,6 @@
     //flag is 0: the page is not in the bookmark list
     //flag is 1: the page is in the bookmark list
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    //the favoriteArray is already synced with NSUserdefault
     for (int i=0; i<self.favoriteArray.count; i++) {
         NSString *title = [[self.favoriteArray objectAtIndex:i] title];
         if ([title isEqualToString:self.item.title]) {
@@ -116,10 +137,13 @@
     else{
      
         [self.favoriteArray addObject:self.item];
-        [defaults setObject:self.favoriteArray forKey:@"favoriteArray"];
-        [defaults synchronize];
+        
+        NSURL *fileURL = [FileSession getListURL];
+        [FileSession writeData:self.favoriteArray ToList:fileURL];
+        
         //add the page info into bookmark
         //and sync to standardUserDefault
+        self.favoriteStar.hidden = NO;
         
          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Liked it" message:@"you can check this page out from bookmark" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:nil, nil];
         
@@ -206,6 +230,17 @@
 -(void)bookmark:(id)sender sendsURL:(NSURL *)url andUpdateArticleItem:(Article *)article{
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:url]];
     self.item = article;
+    self.favoriteStar.hidden = YES;
+    
+    for (int i=0; i<self.favoriteArray.count; i++) {
+        NSString *title = [[self.favoriteArray objectAtIndex:i] title];
+        if ([title isEqualToString:self.item.title]) {
+            self.favoriteStar.hidden = NO;
+            NSLog(@"It's a favorite article");
+            //use loop to detect is the page is already liked before
+            break;
+        }
+    }
 }
 
 

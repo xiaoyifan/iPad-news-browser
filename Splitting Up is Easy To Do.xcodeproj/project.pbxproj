@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC0027BE1A98586C00760ED3 /* FileSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0027BD1A98586C00760ED3 /* FileSession.m */; };
 		CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC032F881A8D4C2000D16270 /* MasterCell.m */; };
 		CC46BA301A90138D00FA2715 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC46BA2F1A90138D00FA2715 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CC7772341A98418900A012D4 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7772331A98418900A012D4 /* Article.m */; };
 		CC98605D1A8EA41A00217B10 /* bookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */; };
+		CCC356DD1A999BF2001CDE17 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCC356DC1A999BF2001CDE17 /* Settings.bundle */; };
 		CCC667741A8B1DE500566932 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667731A8B1DE500566932 /* main.m */; };
 		CCC667771A8B1DE500566932 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667761A8B1DE500566932 /* AppDelegate.m */; };
 		CCC6677A1A8B1DE500566932 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC667791A8B1DE500566932 /* MasterViewController.m */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC0027BC1A98586C00760ED3 /* FileSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSession.h; sourceTree = "<group>"; };
+		CC0027BD1A98586C00760ED3 /* FileSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSession.m; sourceTree = "<group>"; };
 		CC032F871A8D4C2000D16270 /* MasterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterCell.h; sourceTree = "<group>"; };
 		CC032F881A8D4C2000D16270 /* MasterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterCell.m; sourceTree = "<group>"; };
 		CC46BA2F1A90138D00FA2715 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -40,6 +44,7 @@
 		CC7772331A98418900A012D4 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = ../Article.m; sourceTree = "<group>"; };
 		CC98605B1A8EA41A00217B10 /* bookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookmarkTableViewController.h; sourceTree = "<group>"; };
 		CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookmarkTableViewController.m; sourceTree = "<group>"; };
+		CCC356DC1A999BF2001CDE17 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
 		CCC6676E1A8B1DE500566932 /* Splitting Up is Easy To Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Splitting Up is Easy To Do.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC667721A8B1DE500566932 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCC667731A8B1DE500566932 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,6 +134,8 @@
 		CCC667701A8B1DE500566932 /* Splitting Up is Easy To Do */ = {
 			isa = PBXGroup;
 			children = (
+				CC0027BC1A98586C00760ED3 /* FileSession.h */,
+				CC0027BD1A98586C00760ED3 /* FileSession.m */,
 				CCD5DBA91A8C620800D77401 /* SharedNetworking.h */,
 				CCD5DBAA1A8C620800D77401 /* SharedNetworking.m */,
 				CC7772321A98418900A012D4 /* Article.h */,
@@ -147,6 +154,7 @@
 		CCC667711A8B1DE500566932 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCC356DC1A999BF2001CDE17 /* Settings.bundle */,
 				CCC667751A8B1DE500566932 /* AppDelegate.h */,
 				CCC667761A8B1DE500566932 /* AppDelegate.m */,
 				CCC667721A8B1DE500566932 /* Info.plist */,
@@ -252,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCC356DD1A999BF2001CDE17 /* Settings.bundle in Resources */,
 				CCC667801A8B1DE500566932 /* Main.storyboard in Resources */,
 				CCC667851A8B1DE500566932 /* LaunchScreen.xib in Resources */,
 				CCC667821A8B1DE500566932 /* Images.xcassets in Resources */,
@@ -279,6 +288,7 @@
 				CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */,
 				CCC667741A8B1DE500566932 /* main.m in Sources */,
 				CC98605D1A8EA41A00217B10 /* bookmarkTableViewController.m in Sources */,
+				CC0027BE1A98586C00760ED3 /* FileSession.m in Sources */,
 				CCC6677D1A8B1DE500566932 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

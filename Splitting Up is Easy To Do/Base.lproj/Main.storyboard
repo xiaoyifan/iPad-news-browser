@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Detail-->
@@ -21,8 +22,40 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </webView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="QeV-Mm-xlQ">
+                                <rect key="frame" x="16" y="512" width="31" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="31" id="7zZ-Hd-I11"/>
+                                    <constraint firstAttribute="height" constant="31" id="N0Z-nt-wgT"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="QeV-Mm-xlQ" secondAttribute="trailing" constant="10" id="4nl-02-4sQ">
+                                <variation key="heightClass=regular-widthClass=regular" constant="537"/>
+                            </constraint>
+                            <constraint firstItem="QeV-Mm-xlQ" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="7jy-wT-3MX"/>
+                            <constraint firstItem="5pz-XX-6hk" firstAttribute="top" secondItem="QeV-Mm-xlQ" secondAttribute="bottom" constant="10" id="aeW-2V-C5E">
+                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="QeV-Mm-xlQ" secondAttribute="trailing" constant="10" id="yUM-nP-6o5">
+                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4nl-02-4sQ"/>
+                                <exclude reference="yUM-nP-6o5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="4nl-02-4sQ"/>
+                                <exclude reference="7jy-wT-3MX"/>
+                                <include reference="yUM-nP-6o5"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems>
                         <barButtonItem image="favorite" id="h3w-S2-oX7">
@@ -55,6 +88,7 @@
                     <connections>
                         <outlet property="facebookButton" destination="47V-b9-IBu" id="LeJ-Ee-Y20"/>
                         <outlet property="favoriteButton" destination="h3w-S2-oX7" id="Ahq-GK-CyG"/>
+                        <outlet property="favoriteStar" destination="QeV-Mm-xlQ" id="QnZ-XQ-Xwx"/>
                         <outlet property="myWebVIew" destination="KYL-XK-vZN" id="p3n-oE-i4h"/>
                         <outlet property="myWebView" destination="KYL-XK-vZN" id="sQ2-95-4JL"/>
                         <outlet property="twitterButton" destination="6kV-d0-bx9" id="Rhf-Z7-anQ"/>
@@ -62,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671.875" y="128.90625"/>
+            <point key="canvasLocation" x="671" y="128"/>
         </scene>
         <!--Bookmark-->
         <scene sceneID="Tb1-Ed-TQg">
@@ -144,7 +178,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="MasterCell" rowHeight="135" id="WCw-Qf-5nD" customClass="MasterCell">
+                            <tableViewCell autoresizesSubviews="NO" alpha="0.69999999999999996" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="MasterCell" rowHeight="135" id="WCw-Qf-5nD" customClass="MasterCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
@@ -255,6 +289,7 @@
     <resources>
         <image name="facebook" width="50" height="50"/>
         <image name="favorite" width="25" height="25"/>
+        <image name="star" width="32" height="32"/>
         <image name="twitter" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

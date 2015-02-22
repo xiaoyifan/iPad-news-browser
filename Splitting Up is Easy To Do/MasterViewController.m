@@ -24,11 +24,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
         self.preferredContentSize = CGSizeMake(320.0, 600.0);
-        
     }
+    
 }
 
 - (void)viewDidLoad {
@@ -46,11 +47,33 @@
     self.refreshControl = pullToRefresh;
     
     
-    NSString *url = @"http://google.com";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *articleData = [defaults objectForKey:@"lastItem"];
+    
+    Article *article = [NSKeyedUnarchiver unarchiveObjectWithData:articleData];
+    
+    NSString *url = [defaults objectForKey:@"lastUrl"];
+    
+    if (url == nil) {
+        url = @"http://google.com";
+    }
+    else{
+        [self.detailViewController setItem:article];
+    }
     
     [self.detailViewController setUrl:url];
+    
+    
+    BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
+    if (nightMode == true) {
+        self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+    }
+
+    
 
 }
+
+
 
 -(void)downloadDataFromWeb{
     
@@ -112,7 +135,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSLog(@"SEGUEING");
         
         if(![SharedNetworking isNetworkAvailable])
         {
@@ -155,6 +177,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MasterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasterCell" forIndexPath:indexPath];
 
+    
+    BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
+    if (nightMode == true) {
+        NSLog(@"Night Mode of Cell");
+        cell.backgroundColor = [UIColor clearColor];
+        cell.itemDate.textColor = [UIColor lightGrayColor];
+        cell.itemTitle.textColor = [UIColor whiteColor];
+        cell.itemSnippet.textColor = [UIColor whiteColor];
+    }
+    
     self.issue = [self.objects objectAtIndex:indexPath.row];
     cell.itemTitle.text = self.issue.title;
     cell.itemSnippet.text = self.issue.contentSnippet;
