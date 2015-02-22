@@ -11,7 +11,7 @@
 #import "bookmarkTableViewController.h"
 #import "FileSession.h"
 
-@interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate, NSCoding>
+@interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate, NSCoding, UIPopoverPresentationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
 //the main webview of displaying web page
@@ -92,13 +92,6 @@
     [defaults synchronize];
     
     
-}
-
-
--(void)viewWillAppear:(BOOL)animated{
-    self.myWebView.frame = self.view.frame;
-    self.myWebView.scalesPageToFit = YES;
-
 }
 
 
@@ -247,20 +240,30 @@
 #pragma mark - Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showBookMark"]) {
+    if ([segue.identifier isEqualToString:@"showBookMark"])
+    {
+        UINavigationController *destination = [segue destinationViewController];
         
-        bookmarkTableViewController *bookmarkVC = (bookmarkTableViewController *)[[segue destinationViewController] topViewController];
+        bookmarkTableViewController *bookmarkVC = (bookmarkTableViewController *)[destination topViewController];
         
+        UIPopoverPresentationController *popPC = destination.popoverPresentationController;
+        popPC.delegate = self;
         bookmarkVC.delegate = self;
         
         //segue the favorite Array to bookmarkViewController
         [bookmarkVC setItemArray:self.favoriteArray];
-        
-        
+    
     }
     
     
-    
+}
+
+
+
+
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
 }
 
 
