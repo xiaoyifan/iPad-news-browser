@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Splitting Up is Easy To Do/MasterViewController.m"
-            timestampString = "446403947.153455"
+            timestampString = "446412762.040324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-downloadDataFromWeb"
             landmarkType = "5">
          </BreakpointContent>
@@ -33,6 +33,22 @@
             endingLineNumber = "130"
             landmarkName = "-addFavorite:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Splitting Up is Easy To Do/splashScreenDelegate.m"
+            timestampString = "446411099.137523"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "@implementation splashScreenDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

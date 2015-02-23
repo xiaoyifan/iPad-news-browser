@@ -11,20 +11,12 @@
 #import "Social/Social.h"
 #import "Article.h"
 
-@protocol detailWebViewDelegate <NSObject>
-
--(void)webview:(id)sender IsLoaded:(BOOL)Value;
-
-
-@end
-
 
 
 @interface DetailViewController : UIViewController<bookmarkToWebviewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
 
-@property (weak, nonatomic) id<detailWebViewDelegate> webDelegate;
 
 
 //the link from MasterViewController

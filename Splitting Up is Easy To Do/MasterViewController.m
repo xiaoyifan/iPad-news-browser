@@ -100,24 +100,8 @@
                selector:@selector(stateChanged)
                    name:NSUserDefaultsDidChangeNotification
                  object:nil];
-    
-    self.detailViewController.webDelegate = self;
-    
-//    Set the splash screen
-    self.vc = [[UIViewController alloc] init];
-    self.vc.view.backgroundColor = [UIColor yellowColor];
-    
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UIImageView *v = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
-        NSLog(@"The Launch Image: %@",v);
-        [self.vc.view addSubview:v];
-    }
-    
-    [self presentViewController:self.vc animated:NO completion:^{
         
-        NSLog(@"Splash screen is showing");
-    }];
+
     
 
 }
@@ -177,6 +161,11 @@
 
 -(void)downloadDataFromWeb{
     
+    UIViewController *vc = [[UIViewController alloc]init];
+    UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
+    [vc.view addSubview:view];
+    vc.view.backgroundColor = [UIColor yellowColor];
+    [self.delegate displaySplashScreen:vc];
     //download data from internet and put into self.objects
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
@@ -202,6 +191,7 @@
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
+                                                         [self.delegate dismissSplashScreen];
                                                      });
                                                  }failure:^{
                                                      dispatch_async(dispatch_get_main_queue(), ^{

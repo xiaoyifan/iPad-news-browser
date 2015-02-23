@@ -10,13 +10,26 @@
 #import "DetailViewController.h"
 #import "Article.h"
 
+@protocol spashScreenDelegate <NSObject>
+
+-(void)displaySplashScreen:(id)sender;
+
+-(void)dismissSplashScreen;
+
+@end
+
+
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController<detailWebViewDelegate>
+@interface MasterViewController : UITableViewController
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 @property (strong, nonatomic) Article *issue;
+
+@property (weak, nonatomic) id<spashScreenDelegate> delegate;
+
+
 
 @end
 

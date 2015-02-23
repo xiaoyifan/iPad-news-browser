@@ -222,10 +222,6 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     self.loadingView.hidden = YES;
     [self.networkIndicator stopAnimating];
-    [self.webDelegate webview:self.view IsLoaded:TRUE];
-    
-
-
 
 }
 

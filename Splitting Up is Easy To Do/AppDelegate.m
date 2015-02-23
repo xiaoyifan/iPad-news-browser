@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "DetailViewController.h"
+#import "MasterViewController.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate () <UISplitViewControllerDelegate,spashScreenDelegate>
 
 @property (nonatomic, strong) UIViewController *vc;
 @property (strong, nonatomic) DetailViewController *detailViewController;
@@ -20,6 +21,7 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
@@ -28,6 +30,7 @@
     splitViewController.delegate = self;
     
     NSObject *night_obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"enabled_nightmode"];
+    //Check if the key is settle in UserDefaults
 
     if (!night_obj) {
         [self registerSettingBundle];
@@ -42,24 +45,36 @@
         else{
             [self setWhiteAttribute];
         }
-
+        //Set relative attributes for the night/day mode
     }
-
     
+
+    MasterViewController *master = (MasterViewController *)[[splitViewController.viewControllers firstObject] topViewController];
+    master.delegate = self;
+    //Assign the splashSceen to AppDelegate
 
     return YES;
 }
 
--(void)webview:(id)sender IsLoaded:(BOOL)Value{
-    if (Value == true) {
-        if (self.vc != nil) {
-            [self.vc dismissViewControllerAnimated:YES completion:^{self.vc = nil;}];
-            
-        }
-        
-    }
+
+#pragma mark - Splash Screen Delegate implementation
+-(void)displaySplashScreen:(id)sender{
+    NSLog(@"display Splash Screen");
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    [splitViewController presentViewController:(UIViewController*)sender
+                                      animated:YES
+                                    completion:nil];
+    //Display the SplashScreen with the viewController(sender)
 }
 
+-(void)dismissSplashScreen{
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    [splitViewController dismissViewControllerAnimated:YES completion:nil];
+    //dismiss the Splash Screen
+}
+
+
+#pragma mark - Night/Day mode attributes settings
 -(void)setBlackAttribute
 {
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -80,6 +95,7 @@
     
 }
 
+
 -(void)registerSettingBundle{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *appDefaultsMode = [NSDictionary dictionaryWithObject:@"NO"
@@ -88,6 +104,7 @@
     
     [defaults synchronize];
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
