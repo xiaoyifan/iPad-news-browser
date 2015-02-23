@@ -18,6 +18,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(stateChanged)
+                   name:NSUserDefaultsDidChangeNotification
+                 object:nil];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"]) {
+        self.tableView.backgroundColor  = [UIColor colorWithWhite:0 alpha:0.7];
+    }
+}
+
+-(void)stateChanged{
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"]) {
+        self.tableView.backgroundColor  = [UIColor colorWithWhite:0 alpha:0.7];
+    }
+    else{
+        self.tableView.backgroundColor  = [UIColor colorWithWhite:1 alpha:0.7];
+
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,10 +88,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookmarkCell" forIndexPath:indexPath];
     
+    
+    
     Article* article = [self.ItemArray objectAtIndex:indexPath.row];
     cell.textLabel.text = article.title;
     cell.detailTextLabel.text = article.contentSnippet;
     //load bookmark cell
+    
+    
+    BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
+    if (nightMode == true) {
+        cell.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    else {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+    }
+
     
     return cell;
 }

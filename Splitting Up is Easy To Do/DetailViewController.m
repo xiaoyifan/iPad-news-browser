@@ -31,6 +31,7 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *networkIndicator;
 
+
 @end
 
 @implementation DetailViewController
@@ -99,6 +100,8 @@
 
     
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {

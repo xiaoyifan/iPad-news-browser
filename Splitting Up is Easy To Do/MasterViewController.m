@@ -32,6 +32,12 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    self.tableView.estimatedRowHeight = 120;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -269,6 +275,8 @@
     cell.itemTitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     cell.itemDate.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     cell.itemSnippet.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    
+    [cell layoutIfNeeded];
     
     return cell;
 }
