@@ -11,6 +11,10 @@
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
+@property (nonatomic, strong) UIViewController *vc;
+@property (strong, nonatomic) DetailViewController *detailViewController;
+
+
 @end
 
 @implementation AppDelegate
@@ -40,10 +44,20 @@
         }
 
     }
+
     
-    
-    
+
     return YES;
+}
+
+-(void)webview:(id)sender IsLoaded:(BOOL)Value{
+    if (Value == true) {
+        if (self.vc != nil) {
+            [self.vc dismissViewControllerAnimated:YES completion:^{self.vc = nil;}];
+            
+        }
+        
+    }
 }
 
 -(void)setBlackAttribute
@@ -93,6 +107,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+            // animate = NO because we don't want to see the mainVC's view
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

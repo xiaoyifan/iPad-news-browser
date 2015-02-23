@@ -103,21 +103,22 @@
     
     self.detailViewController.webDelegate = self;
     
-    //Set the splash screen
+//    Set the splash screen
     self.vc = [[UIViewController alloc] init];
-    self.vc.view.backgroundColor = [UIColor whiteColor];
+    self.vc.view.backgroundColor = [UIColor yellowColor];
+    
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            UIImageView *v = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
-            NSLog(@"The Launch Image: %@",v);
-            [self.vc.view addSubview:v];
+        UIImageView *v = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
+        NSLog(@"The Launch Image: %@",v);
+        [self.vc.view addSubview:v];
     }
-
+    
     [self presentViewController:self.vc animated:NO completion:^{
         
         NSLog(@"Splash screen is showing");
     }];
-
+    
 
 }
 
