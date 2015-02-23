@@ -10,6 +10,7 @@
 		CC0027BE1A98586C00760ED3 /* FileSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0027BD1A98586C00760ED3 /* FileSession.m */; };
 		CC032F891A8D4C2000D16270 /* MasterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC032F881A8D4C2000D16270 /* MasterCell.m */; };
 		CC46BA301A90138D00FA2715 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC46BA2F1A90138D00FA2715 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CC5786151A9B31FC007BBDC6 /* Chicago.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC5786141A9B31FC007BBDC6 /* Chicago.jpg */; };
 		CC7772341A98418900A012D4 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7772331A98418900A012D4 /* Article.m */; };
 		CC98605D1A8EA41A00217B10 /* bookmarkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98605C1A8EA41A00217B10 /* bookmarkTableViewController.m */; };
 		CCC356DD1A999BF2001CDE17 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCC356DC1A999BF2001CDE17 /* Settings.bundle */; };
@@ -40,6 +41,7 @@
 		CC032F871A8D4C2000D16270 /* MasterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterCell.h; sourceTree = "<group>"; };
 		CC032F881A8D4C2000D16270 /* MasterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterCell.m; sourceTree = "<group>"; };
 		CC46BA2F1A90138D00FA2715 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CC5786141A9B31FC007BBDC6 /* Chicago.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Chicago.jpg; sourceTree = "<group>"; };
 		CC7772321A98418900A012D4 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = ../Article.h; sourceTree = "<group>"; };
 		CC7772331A98418900A012D4 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = ../Article.m; sourceTree = "<group>"; };
 		CC98605B1A8EA41A00217B10 /* bookmarkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookmarkTableViewController.h; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		CCC667711A8B1DE500566932 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CC5786141A9B31FC007BBDC6 /* Chicago.jpg */,
 				CCC356DC1A999BF2001CDE17 /* Settings.bundle */,
 				CCC667751A8B1DE500566932 /* AppDelegate.h */,
 				CCC667761A8B1DE500566932 /* AppDelegate.m */,
@@ -260,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5786151A9B31FC007BBDC6 /* Chicago.jpg in Resources */,
 				CCC356DD1A999BF2001CDE17 /* Settings.bundle in Resources */,
 				CCC667801A8B1DE500566932 /* Main.storyboard in Resources */,
 				CCC667851A8B1DE500566932 /* LaunchScreen.xib in Resources */,
@@ -413,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Splitting Up is Easy To Do/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -424,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Splitting Up is Easy To Do/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

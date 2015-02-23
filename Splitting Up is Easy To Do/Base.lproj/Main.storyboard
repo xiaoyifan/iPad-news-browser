@@ -63,10 +63,10 @@
                                     <mask key="constraints">
                                         <exclude reference="IRe-j6-kkF"/>
                                         <exclude reference="L3A-y5-aI1"/>
-                                        <exclude reference="GAa-oF-xXN"/>
-                                        <exclude reference="mfu-dX-Olx"/>
                                         <exclude reference="rEc-0g-fkP"/>
                                         <exclude reference="rrM-qK-nST"/>
+                                        <exclude reference="GAa-oF-xXN"/>
+                                        <exclude reference="mfu-dX-Olx"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -77,10 +77,10 @@
                                     <mask key="constraints">
                                         <include reference="IRe-j6-kkF"/>
                                         <include reference="L3A-y5-aI1"/>
-                                        <include reference="GAa-oF-xXN"/>
-                                        <include reference="mfu-dX-Olx"/>
                                         <include reference="rEc-0g-fkP"/>
                                         <include reference="rrM-qK-nST"/>
+                                        <include reference="GAa-oF-xXN"/>
+                                        <include reference="mfu-dX-Olx"/>
                                     </mask>
                                 </variation>
                             </view>

@@ -7,7 +7,6 @@
 //
 
 #import "MasterViewController.h"
-#import "DetailViewController.h"
 #import "SharedNetworking.h"
 #import "MasterCell.h"
 #import "Article.h"
@@ -17,6 +16,9 @@
 @property NSDictionary* links;
 
 @property (nonatomic, strong) NSMutableArray *objects;
+
+@property (strong, nonatomic) UIViewController* vc;
+
 
 @end
 
@@ -36,9 +38,22 @@
     
     self.tableView.estimatedRowHeight = 120;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+
 }
 
+-(void)webview:(id)sender IsLoaded:(BOOL)Value{
+    if (Value == true) {
+        if (self.vc != nil) {
+            [self.vc dismissViewControllerAnimated:YES completion:^{self.vc = nil;}];
+
+        }
+        
+    }
+}
+
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
@@ -85,6 +100,24 @@
                selector:@selector(stateChanged)
                    name:NSUserDefaultsDidChangeNotification
                  object:nil];
+    
+    self.detailViewController.webDelegate = self;
+    
+    //Set the splash screen
+    self.vc = [[UIViewController alloc] init];
+    self.vc.view.backgroundColor = [UIColor whiteColor];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            UIImageView *v = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
+            NSLog(@"The Launch Image: %@",v);
+            [self.vc.view addSubview:v];
+    }
+
+    [self presentViewController:self.vc animated:NO completion:^{
+        
+        NSLog(@"Splash screen is showing");
+    }];
+
 
 }
 
@@ -239,6 +272,7 @@
 
     return self.objects.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MasterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasterCell" forIndexPath:indexPath];

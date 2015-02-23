@@ -31,7 +31,6 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *networkIndicator;
 
-
 @end
 
 @implementation DetailViewController
@@ -42,6 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"The url is %@", self.url);
     
@@ -80,9 +80,7 @@
         }
     }
     
-    
-    
-    
+ 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.item!=nil) {
         NSData *serialized = [NSKeyedArchiver archivedDataWithRootObject:self.item];
@@ -97,12 +95,9 @@
     
     self.loadingView.layer.cornerRadius = 10;
     self.loadingView.layer.masksToBounds = YES;
-
+    
     
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -227,6 +222,10 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     self.loadingView.hidden = YES;
     [self.networkIndicator stopAnimating];
+    [self.webDelegate webview:self.view IsLoaded:TRUE];
+    
+
+
 
 }
 
