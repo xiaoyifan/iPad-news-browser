@@ -11,6 +11,7 @@
 #import "bookmarkTableViewController.h"
 #import "FileSession.h"
 
+
 @interface DetailViewController ()<UIWebViewDelegate, UIActionSheetDelegate, NSCoding, UIPopoverPresentationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *myWebVIew;
@@ -26,7 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *facebookButton;
 //UIBarButtons' outlets
 
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *networkIndicator;
 
 @end
 
@@ -91,6 +94,9 @@
     [defaults setObject:self.url forKey:@"lastUrl"];
     [defaults synchronize];
     
+    self.loadingView.layer.cornerRadius = 10;
+    self.loadingView.layer.masksToBounds = YES;
+
     
 }
 
@@ -208,12 +214,16 @@
 //network indicator specification
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [self.networkIndicator startAnimating];
+    self.loadingView.hidden = NO;
 
 }
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    self.loadingView.hidden = YES;
+    [self.networkIndicator stopAnimating];
 
 }
 

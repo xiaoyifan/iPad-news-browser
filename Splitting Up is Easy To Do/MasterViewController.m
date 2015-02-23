@@ -69,8 +69,68 @@
         self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
     }
 
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(stateChanged)
+                   name:UIContentSizeCategoryDidChangeNotification
+                 object:nil];
     
+    [center addObserver:self
+               selector:@selector(stateChanged)
+                   name:NSUserDefaultsDidChangeNotification
+                 object:nil];
 
+}
+
+-(void)stateChanged{
+    [self.tableView reloadData];
+    BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
+    UINavigationController *navigationController = (UINavigationController *)self.parentViewController;
+    UINavigationController *detailNavigationController = (UINavigationController *)self.detailViewController.parentViewController;
+    if (nightMode == true) {
+        [navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+        [navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                    [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [navigationController.navigationBar setNeedsDisplay];
+        
+        
+        [detailNavigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+        [detailNavigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                    [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [detailNavigationController.navigationBar setNeedsDisplay];
+        
+        [detailNavigationController.toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        [detailNavigationController.toolbar setTintColor:[UIColor whiteColor]];
+        [detailNavigationController.toolbar setNeedsDisplay];
+        self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+        [self.tableView reloadData];
+    }
+    else{
+        self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
+        [navigationController.navigationBar setTintColor:[UIColor blueColor]];
+        [navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+        [navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [UIColor blackColor], NSForegroundColorAttributeName,
+                                                              [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [detailNavigationController.navigationBar setNeedsDisplay];
+        [detailNavigationController.navigationBar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+
+        [detailNavigationController.navigationBar setBarStyle:UIBarStyleDefault];
+        [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    [UIColor blackColor], NSForegroundColorAttributeName,
+                                                                    [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [detailNavigationController.navigationBar setNeedsDisplay];
+        
+        [detailNavigationController.toolbar setBarStyle:UIBarStyleDefault];
+        [detailNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [detailNavigationController.toolbar setNeedsDisplay];
+        
+        [self.tableView reloadData];
+    }
 }
 
 
@@ -180,11 +240,16 @@
     
     BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
     if (nightMode == true) {
-        NSLog(@"Night Mode of Cell");
         cell.backgroundColor = [UIColor clearColor];
         cell.itemDate.textColor = [UIColor lightGrayColor];
         cell.itemTitle.textColor = [UIColor whiteColor];
         cell.itemSnippet.textColor = [UIColor whiteColor];
+    }
+    else {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.itemDate.textColor = [UIColor darkGrayColor];
+        cell.itemTitle.textColor = [UIColor blackColor];
+        cell.itemSnippet.textColor = [UIColor blackColor];
     }
     
     self.issue = [self.objects objectAtIndex:indexPath.row];
@@ -200,6 +265,10 @@
     [dateformat setDateFormat:@"MM-dd-yyyy"];
     NSString *date = [dateformat stringFromDate:publishDate];
     cell.itemDate.text = date;
+    
+    cell.itemTitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    cell.itemDate.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    cell.itemSnippet.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     
     return cell;
 }

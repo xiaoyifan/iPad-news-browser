@@ -28,10 +28,69 @@
                                     <constraint firstAttribute="width" constant="31" id="7zZ-Hd-I11"/>
                                     <constraint firstAttribute="height" constant="31" id="N0Z-nt-wgT"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="543" y="710" width="31" height="31"/>
+                                </variation>
                             </imageView>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fh9-ya-kZc" customClass="loadingView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aei-sB-at3">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="seF-E6-Uf2">
+                                        <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.16619318181818177" green="0.16619318181818177" blue="0.16619318181818177" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="seF-E6-Uf2" secondAttribute="centerX" id="GAa-oF-xXN"/>
+                                    <constraint firstAttribute="height" constant="155" id="IRe-j6-kkF"/>
+                                    <constraint firstAttribute="width" constant="155" id="L3A-y5-aI1"/>
+                                    <constraint firstItem="seF-E6-Uf2" firstAttribute="top" secondItem="fh9-ya-kZc" secondAttribute="top" constant="40" id="mfu-dX-Olx">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="46"/>
+                                    </constraint>
+                                    <constraint firstAttribute="bottom" secondItem="aei-sB-at3" secondAttribute="bottom" constant="40" id="rEc-0g-fkP">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="37"/>
+                                    </constraint>
+                                    <constraint firstAttribute="centerX" secondItem="aei-sB-at3" secondAttribute="centerX" id="rrM-qK-nST"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="aei-sB-at3"/>
+                                        <exclude reference="seF-E6-Uf2"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="IRe-j6-kkF"/>
+                                        <exclude reference="L3A-y5-aI1"/>
+                                        <exclude reference="GAa-oF-xXN"/>
+                                        <exclude reference="mfu-dX-Olx"/>
+                                        <exclude reference="rEc-0g-fkP"/>
+                                        <exclude reference="rrM-qK-nST"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="aei-sB-at3"/>
+                                        <include reference="seF-E6-Uf2"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="IRe-j6-kkF"/>
+                                        <include reference="L3A-y5-aI1"/>
+                                        <include reference="GAa-oF-xXN"/>
+                                        <include reference="mfu-dX-Olx"/>
+                                        <include reference="rEc-0g-fkP"/>
+                                        <include reference="rrM-qK-nST"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="fh9-ya-kZc" secondAttribute="centerX" id="1F5-Dj-yX7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QeV-Mm-xlQ" secondAttribute="trailing" constant="10" id="4nl-02-4sQ">
                                 <variation key="heightClass=regular-widthClass=regular" constant="537"/>
                             </constraint>
@@ -39,18 +98,29 @@
                             <constraint firstItem="5pz-XX-6hk" firstAttribute="top" secondItem="QeV-Mm-xlQ" secondAttribute="bottom" constant="10" id="aeW-2V-C5E">
                                 <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                             </constraint>
+                            <constraint firstAttribute="centerY" secondItem="fh9-ya-kZc" secondAttribute="centerY" id="oUv-46-6Nw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QeV-Mm-xlQ" secondAttribute="trailing" constant="10" id="yUM-nP-6o5">
                                 <variation key="heightClass=regular-widthClass=regular" constant="10"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="fh9-ya-kZc"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="1F5-Dj-yX7"/>
+                                <exclude reference="oUv-46-6Nw"/>
                                 <exclude reference="4nl-02-4sQ"/>
                                 <exclude reference="yUM-nP-6o5"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="fh9-ya-kZc"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="1F5-Dj-yX7"/>
+                                <include reference="oUv-46-6Nw"/>
                                 <exclude reference="4nl-02-4sQ"/>
                                 <exclude reference="7jy-wT-3MX"/>
                                 <include reference="yUM-nP-6o5"/>
@@ -89,14 +159,16 @@
                         <outlet property="facebookButton" destination="47V-b9-IBu" id="LeJ-Ee-Y20"/>
                         <outlet property="favoriteButton" destination="h3w-S2-oX7" id="Ahq-GK-CyG"/>
                         <outlet property="favoriteStar" destination="QeV-Mm-xlQ" id="QnZ-XQ-Xwx"/>
+                        <outlet property="loadingView" destination="fh9-ya-kZc" id="oKR-er-cZn"/>
                         <outlet property="myWebVIew" destination="KYL-XK-vZN" id="p3n-oE-i4h"/>
                         <outlet property="myWebView" destination="KYL-XK-vZN" id="sQ2-95-4JL"/>
+                        <outlet property="networkIndicator" destination="seF-E6-Uf2" id="rv8-TR-vSW"/>
                         <outlet property="twitterButton" destination="6kV-d0-bx9" id="Rhf-Z7-anQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="128"/>
+            <point key="canvasLocation" x="62" y="553"/>
         </scene>
         <!--Bookmark-->
         <scene sceneID="Tb1-Ed-TQg">
@@ -153,7 +225,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoP-rw-QV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2165.625" y="128.90625"/>
+            <point key="canvasLocation" x="1537" y="553"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -223,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="906" y="-658"/>
+            <point key="canvasLocation" x="638" y="-284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -243,7 +315,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-45" y="129.00000000000003"/>
+            <point key="canvasLocation" x="-677" y="553"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8GJ-Q8-lJY">
@@ -265,7 +337,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sB1-El-U7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="128.90625"/>
+            <point key="canvasLocation" x="816" y="553"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1H0-S6-fro">
@@ -283,7 +355,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8XI-6e-WP8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="17.96875" y="-657.421875"/>
+            <point key="canvasLocation" x="-227" y="-284"/>
         </scene>
     </scenes>
     <resources>
