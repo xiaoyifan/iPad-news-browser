@@ -21,22 +21,51 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self
-               selector:@selector(stateChanged)
+               selector:@selector(stateChangedX)
                    name:NSUserDefaultsDidChangeNotification
                  object:nil];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"]) {
         self.tableView.backgroundColor  = [UIColor colorWithWhite:0 alpha:0.7];
     }
+    else{
+        self.tableView.backgroundColor  = [UIColor colorWithWhite:1 alpha:0.7];
+
+    }
+    
+    [self stateChangedX];
+    
 }
 
--(void)stateChanged{
+-(void)stateChangedX{
     
+    UINavigationController *bookmarkNavigationController = (UINavigationController *)self.parentViewController;
+    NSLog(@"BookmarkView state Changeed");
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"]) {
         self.tableView.backgroundColor  = [UIColor colorWithWhite:0 alpha:0.7];
+        [bookmarkNavigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [bookmarkNavigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+        [bookmarkNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                    [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [bookmarkNavigationController.navigationBar setNeedsDisplay];
+        
+        [bookmarkNavigationController.toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        [bookmarkNavigationController.toolbar setTintColor:[UIColor whiteColor]];
+        [bookmarkNavigationController.toolbar setNeedsDisplay];
     }
     else{
         self.tableView.backgroundColor  = [UIColor colorWithWhite:1 alpha:0.7];
+        [bookmarkNavigationController.navigationBar setTintColor:[UIColor blackColor]];
+        [bookmarkNavigationController.navigationBar setBarStyle:UIBarStyleDefault];
+        [bookmarkNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                            [UIColor blackColor], NSForegroundColorAttributeName,
+                                                                            [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [bookmarkNavigationController.navigationBar setNeedsDisplay];
+        
+        [bookmarkNavigationController.toolbar setBarStyle:UIBarStyleDefault];
+        [bookmarkNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [bookmarkNavigationController.toolbar setNeedsDisplay];
 
     }
     
@@ -95,7 +124,7 @@
     cell.detailTextLabel.text = article.contentSnippet;
     //load bookmark cell
     
-    
+    //Night Mode 
     BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
     if (nightMode == true) {
         cell.backgroundColor = [UIColor clearColor];

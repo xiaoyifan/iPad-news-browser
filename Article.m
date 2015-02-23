@@ -10,15 +10,16 @@
 
 @implementation Article
 
+//Implement the encoding method
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    //[super encodeWithCoder: encoder]; // if super conforms to NSCoding
     [encoder encodeObject:self.title forKey:@"title"];
     [encoder encodeObject:self.publishedDate forKey:@"publishedDate"];
     [encoder encodeObject:self.contentSnippet forKey:@"contentSnippet"];
     [encoder encodeObject:self.link forKey:@"link"];
 }
+
+//implement the decoding method
 - (id) initWithCoder:(NSCoder *)decoder {
-    //self = [super initWithCoder: decoder]; // if super conforms to NSCoding
     self = [super init];
     self.title = [decoder decodeObjectForKey:@"title"];
     self.contentSnippet = [decoder decodeObjectForKey:@"contentSnippet"];

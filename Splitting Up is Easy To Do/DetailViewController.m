@@ -68,7 +68,7 @@
     self.favoriteArray = [NSMutableArray arrayWithArray:[FileSession readDataFromList:fileURL]];
     //save favorite items to array, and things will be loaded to bookmarkViewController
     
-    
+    //test if the article is favorited
     self.favoriteStar.hidden = YES;
     for (int i=0; i<self.favoriteArray.count; i++) {
         NSString *title = [[self.favoriteArray objectAtIndex:i] title];
@@ -80,7 +80,7 @@
         }
     }
     
- 
+    //load the default page
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.item!=nil) {
         NSData *serialized = [NSKeyedArchiver archivedDataWithRootObject:self.item];
@@ -93,11 +93,65 @@
     [defaults setObject:self.url forKey:@"lastUrl"];
     [defaults synchronize];
     
+    
+    //set the loading view to a round rect
     self.loadingView.layer.cornerRadius = 10;
     self.loadingView.layer.masksToBounds = YES;
     
+    [self stateChanged];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(stateChanged)
+                   name:UIContentSizeCategoryDidChangeNotification
+                 object:nil];
+    
+    [center addObserver:self
+               selector:@selector(stateChanged)
+                   name:NSUserDefaultsDidChangeNotification
+                 object:nil];
+    
     
 }
+
+
+//Settings changed
+-(void)stateChanged{
+    NSLog(@"the state is changed");
+    
+    BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
+    UINavigationController *detailNavigationController = (UINavigationController *)self.parentViewController;
+    if (nightMode == true) {
+        [detailNavigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+        [detailNavigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                          [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [detailNavigationController.navigationBar setNeedsDisplay];
+        
+        [detailNavigationController.toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        [detailNavigationController.toolbar setTintColor:[UIColor whiteColor]];
+        [detailNavigationController.toolbar setNeedsDisplay];
+        
+    }
+    else{
+        [detailNavigationController.navigationBar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        
+        [detailNavigationController.navigationBar setBarStyle:UIBarStyleDefault];
+        [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                          [UIColor blackColor], NSForegroundColorAttributeName,
+                                                                          [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
+        [detailNavigationController.navigationBar setNeedsDisplay];
+        
+        [detailNavigationController.toolbar setBarStyle:UIBarStyleDefault];
+        [detailNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [detailNavigationController.toolbar setNeedsDisplay];
+        
+
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

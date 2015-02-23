@@ -17,9 +17,6 @@
 
 @property (nonatomic, strong) NSMutableArray *objects;
 
-@property (strong, nonatomic) UIViewController* vc;
-
-
 @end
 
 @implementation MasterViewController
@@ -38,7 +35,7 @@
     
     self.tableView.estimatedRowHeight = 120;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-
+    //tableView Cell auto-resizing
 }
 
 
@@ -50,14 +47,14 @@
     
     [self downloadDataFromWeb];
     
-    
+    //refresh controll
     UIRefreshControl *pullToRefresh = [[UIRefreshControl alloc] init];
     pullToRefresh.tintColor = [UIColor magentaColor];
     [pullToRefresh addTarget:self action:@selector(refreshAction)
             forControlEvents:UIControlEventValueChanged];
     self.refreshControl = pullToRefresh;
     
-    
+    //load the last webpage we browsed as default
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *articleData = [defaults objectForKey:@"lastItem"];
     
@@ -74,12 +71,13 @@
     
     [self.detailViewController setUrl:url];
     
-    
+    //Night Mode
     BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
     if (nightMode == true) {
         self.tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
     }
 
+    //Notification register, to see the changes in settings
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self
                selector:@selector(stateChanged)
@@ -95,7 +93,9 @@
 
 }
 
+//Settings changed
 -(void)stateChanged{
+    
     [self.tableView reloadData];
     BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
     UINavigationController *navigationController = (UINavigationController *)self.parentViewController;
@@ -149,13 +149,7 @@
 
 
 -(void)downloadDataFromWeb{
-    
-//    UIViewController *vc = [[UIViewController alloc]init];
-//    UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
-//    [vc.view addSubview:view];
-//    vc.view.backgroundColor = [UIColor yellowColor];
-//    [self.delegate displaySplashScreen:vc];
-    //download data from internet and put into self.objects
+
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
                                                      self.links = dictionary[@"responseData"][@"feed"][@"entries"];
@@ -180,7 +174,7 @@
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
-//                                                         [self.delegate dismissSplashScreen];
+//                                                       //Post notification when the table data is loaded
                                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"tableViewdidLoad" object:self];
 
                                                      });
@@ -259,7 +253,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MasterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasterCell" forIndexPath:indexPath];
 
-    
+    //Night mode change for each cell
     BOOL nightMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"enabled_nightmode"];
     if (nightMode == true) {
         cell.backgroundColor = [UIColor clearColor];
@@ -288,6 +282,7 @@
     NSString *date = [dateformat stringFromDate:publishDate];
     cell.itemDate.text = date;
     
+    //dynamic type for cells
     cell.itemTitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     cell.itemDate.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     cell.itemSnippet.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
