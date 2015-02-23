@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Splitting Up is Easy To Do/MasterViewController.m"
-            timestampString = "446412762.040324"
+            timestampString = "446416874.488216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-downloadDataFromWeb"
             landmarkType = "5">
          </BreakpointContent>

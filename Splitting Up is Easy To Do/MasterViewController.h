@@ -10,13 +10,6 @@
 #import "DetailViewController.h"
 #import "Article.h"
 
-@protocol spashScreenDelegate <NSObject>
-
--(void)displaySplashScreen:(id)sender;
-
--(void)dismissSplashScreen;
-
-@end
 
 
 @class DetailViewController;
@@ -27,7 +20,6 @@
 
 @property (strong, nonatomic) Article *issue;
 
-@property (weak, nonatomic) id<spashScreenDelegate> delegate;
 
 
 

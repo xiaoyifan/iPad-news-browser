@@ -41,16 +41,6 @@
 
 }
 
--(void)webview:(id)sender IsLoaded:(BOOL)Value{
-    if (Value == true) {
-        if (self.vc != nil) {
-            [self.vc dismissViewControllerAnimated:YES completion:^{self.vc = nil;}];
-
-        }
-        
-    }
-}
-
 
 - (void)viewDidLoad {
     
@@ -100,7 +90,6 @@
                selector:@selector(stateChanged)
                    name:NSUserDefaultsDidChangeNotification
                  object:nil];
-        
 
     
 
@@ -161,11 +150,11 @@
 
 -(void)downloadDataFromWeb{
     
-    UIViewController *vc = [[UIViewController alloc]init];
-    UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
-    [vc.view addSubview:view];
-    vc.view.backgroundColor = [UIColor yellowColor];
-    [self.delegate displaySplashScreen:vc];
+//    UIViewController *vc = [[UIViewController alloc]init];
+//    UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
+//    [vc.view addSubview:view];
+//    vc.view.backgroundColor = [UIColor yellowColor];
+//    [self.delegate displaySplashScreen:vc];
     //download data from internet and put into self.objects
     [[SharedNetworking sharedSharedWorking]getFeedForURL:nil
                                                  success:^(NSDictionary *dictionary, NSError *error){
@@ -191,7 +180,9 @@
                                                      
                                                      dispatch_async(dispatch_get_main_queue(), ^{
                                                          [self.tableView reloadData];
-                                                         [self.delegate dismissSplashScreen];
+//                                                         [self.delegate dismissSplashScreen];
+                                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"tableViewdidLoad" object:self];
+
                                                      });
                                                  }failure:^{
                                                      dispatch_async(dispatch_get_main_queue(), ^{

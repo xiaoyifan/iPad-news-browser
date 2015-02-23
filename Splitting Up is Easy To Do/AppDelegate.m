@@ -10,10 +10,12 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate,spashScreenDelegate>
+@interface AppDelegate () <UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) UIViewController *vc;
 @property (strong, nonatomic) DetailViewController *detailViewController;
+
+@property (nonatomic, strong) UIView *splash;
 
 
 @end
@@ -49,29 +51,39 @@
     }
     
 
-    MasterViewController *master = (MasterViewController *)[[splitViewController.viewControllers firstObject] topViewController];
-    master.delegate = self;
+    //MasterViewController *master = (MasterViewController *)[[splitViewController.viewControllers firstObject] topViewController];
     //Assign the splashSceen to AppDelegate
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(removeSplashView) name:@"tableViewdidLoad" object:nil];
+    
+    
+    self.splash = [[UIImageView alloc]initWithFrame:self.window.bounds];
+    UIImageView *chicago = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Chicago.jpg"]];
+    [self.splash addSubview:chicago];
+    [self.window.rootViewController.view addSubview:self.splash];
+    
+    self.splash.alpha = 0;
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.splash.alpha = 1;
+                     }];
+    
 
     return YES;
 }
 
+-(void)removeSplashView{
+    
+    [UIView animateWithDuration:2.5
+                     animations:^{self.splash.alpha = 0.0;}
+                     completion:^(BOOL finished){
+                         [self.splash performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
 
-#pragma mark - Splash Screen Delegate implementation
--(void)displaySplashScreen:(id)sender{
-    NSLog(@"display Splash Screen");
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    [splitViewController presentViewController:(UIViewController*)sender
-                                      animated:YES
-                                    completion:nil];
-    //Display the SplashScreen with the viewController(sender)
+                     }];
 }
 
--(void)dismissSplashScreen{
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    [splitViewController dismissViewControllerAnimated:YES completion:nil];
-    //dismiss the Splash Screen
-}
+
 
 
 #pragma mark - Night/Day mode attributes settings
