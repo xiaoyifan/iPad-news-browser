@@ -59,7 +59,7 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:nsUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     
      self.myWebView.delegate = self;
-    self.myWebView.scalesPageToFit = self;
+    self.myWebView.scalesPageToFit = YES;
     self.myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     [self.myWebView loadRequest:request];
     //load the URL request to WebView
@@ -282,16 +282,19 @@
     [self.networkIndicator stopAnimating];
     
     
-    CGSize contentSize = webView.scrollView.contentSize;
-    CGSize viewSize = self.view.bounds.size;
-    
-    float rw = viewSize.width / contentSize.width;
-    
-    webView.scrollView.minimumZoomScale = rw;
-    webView.scrollView.maximumZoomScale = rw;
-    webView.scrollView.zoomScale = rw;
+//    
+//    CGSize contentSize = webView.scrollView.contentSize;
+//    CGSize viewSize = self.view.bounds.size;
+//    
+//    float rw = viewSize.width / contentSize.width;
+//    
+//    webView.scrollView.minimumZoomScale = rw;
+//    webView.scrollView.maximumZoomScale = rw;
+//    webView.scrollView.zoomScale = rw;
     
 }
+
+
 
 #pragma mark - bookmark Delegate implementation
 
