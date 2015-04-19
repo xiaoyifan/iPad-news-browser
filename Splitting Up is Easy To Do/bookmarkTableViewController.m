@@ -64,7 +64,7 @@
         [bookmarkNavigationController.navigationBar setNeedsDisplay];
         
         [bookmarkNavigationController.toolbar setBarStyle:UIBarStyleDefault];
-        [bookmarkNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [bookmarkNavigationController.toolbar setTintColor:[UIColor grayColor]];
         [bookmarkNavigationController.toolbar setNeedsDisplay];
 
     }

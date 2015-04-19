@@ -33,7 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    self.tableView.estimatedRowHeight = 120;
+    self.tableView.estimatedRowHeight = 140;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     //tableView Cell auto-resizing
 }
@@ -49,7 +49,8 @@
     
     //refresh controll
     UIRefreshControl *pullToRefresh = [[UIRefreshControl alloc] init];
-    pullToRefresh.tintColor = [UIColor magentaColor];
+    pullToRefresh.tintColor = [UIColor lightGrayColor];
+    
     [pullToRefresh addTarget:self action:@selector(refreshAction)
             forControlEvents:UIControlEventValueChanged];
     self.refreshControl = pullToRefresh;
@@ -124,13 +125,13 @@
     }
     else{
         self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
-        [navigationController.navigationBar setTintColor:[UIColor blueColor]];
+        [navigationController.navigationBar setTintColor:[UIColor grayColor]];
         [navigationController.navigationBar setBarStyle:UIBarStyleDefault];
         [navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                               [UIColor blackColor], NSForegroundColorAttributeName,
                                                               [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
         [detailNavigationController.navigationBar setNeedsDisplay];
-        [detailNavigationController.navigationBar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [detailNavigationController.navigationBar setTintColor:[UIColor lightGrayColor]];
 
         [detailNavigationController.navigationBar setBarStyle:UIBarStyleDefault];
         [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -139,7 +140,7 @@
         [detailNavigationController.navigationBar setNeedsDisplay];
         
         [detailNavigationController.toolbar setBarStyle:UIBarStyleDefault];
-        [detailNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [detailNavigationController.toolbar setTintColor:[UIColor lightGrayColor]];
         [detailNavigationController.toolbar setNeedsDisplay];
         
         [self.tableView reloadData];
@@ -259,13 +260,13 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.itemDate.textColor = [UIColor lightGrayColor];
         cell.itemTitle.textColor = [UIColor whiteColor];
-        cell.itemSnippet.textColor = [UIColor whiteColor];
+        cell.itemSnippet.textColor = [UIColor darkGrayColor];
     }
     else {
         cell.backgroundColor = [UIColor whiteColor];
-        cell.itemDate.textColor = [UIColor darkGrayColor];
+        cell.itemDate.textColor = [UIColor lightGrayColor];
         cell.itemTitle.textColor = [UIColor blackColor];
-        cell.itemSnippet.textColor = [UIColor blackColor];
+        cell.itemSnippet.textColor = [UIColor darkGrayColor];
     }
     
     self.issue = [self.objects objectAtIndex:indexPath.row];

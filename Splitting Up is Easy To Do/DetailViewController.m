@@ -59,6 +59,8 @@
     NSURLRequest* request = [NSURLRequest requestWithURL:nsUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     
      self.myWebView.delegate = self;
+    self.myWebView.scalesPageToFit = self;
+    self.myWebView.scrollView.showsHorizontalScrollIndicator = NO;
     [self.myWebView loadRequest:request];
     //load the URL request to WebView
     
@@ -135,7 +137,7 @@
         
     }
     else{
-        [detailNavigationController.navigationBar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+//        [detailNavigationController.navigationBar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
         
         [detailNavigationController.navigationBar setBarStyle:UIBarStyleDefault];
         [detailNavigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -144,7 +146,7 @@
         [detailNavigationController.navigationBar setNeedsDisplay];
         
         [detailNavigationController.toolbar setBarStyle:UIBarStyleDefault];
-        [detailNavigationController.toolbar setTintColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0]];
+        [detailNavigationController.toolbar setTintColor:[UIColor grayColor]];
         [detailNavigationController.toolbar setNeedsDisplay];
         
 
@@ -272,13 +274,24 @@
 }
 
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     self.loadingView.hidden = YES;
     [self.networkIndicator stopAnimating];
-
+    
+    
+    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = self.view.bounds.size;
+    
+    float rw = viewSize.width / contentSize.width;
+    
+    webView.scrollView.minimumZoomScale = rw;
+    webView.scrollView.maximumZoomScale = rw;
+    webView.scrollView.zoomScale = rw;
+    
 }
-
 
 #pragma mark - bookmark Delegate implementation
 

@@ -100,7 +100,7 @@
 
 -(void)setWhiteAttribute
 {
-   
+    [[UINavigationBar appearance] setTintColor:[UIColor grayColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0], NSFontAttributeName,nil]];
